@@ -1,4 +1,7 @@
 {
+  "name": "SmartWeather",
+  "version": "0.1.0",
+  "author":"mohanpd",
   "main": "node_modules/expo/AppEntry.js",
   "scripts": {
     "start": "expo start",
@@ -12,11 +15,27 @@
     "react": "~16.9.0",
     "react-dom": "~16.9.0",
     "react-native": "https://github.com/expo/react-native/archive/sdk-36.0.0.tar.gz",
-    "react-native-web": "~0.11.7"
+    "react-native-web": "~0.11.7",
+    "react-native-material-switch": "0.0.4",
+    "react-native-progress": "^3.2.0",
+    "react-native-vector-icons": "^4.0.0",
+    "react-redux": "^5.0.2",
+    "redux": "^3.6.0",
+    "redux-actions": "^1.2.0",
+    "redux-logger": "^2.7.4",
+    "redux-promise": "^0.5.3",
+    "redux-thunk": "^2.1.0",
+    "remote-redux-devtools": "^0.5.7"
   },
   "devDependencies": {
     "babel-preset-expo": "~8.0.0",
-    "@babel/core": "^7.0.0"
+    "@babel/core": "^7.0.0",
+    "jest-expo": "~27.0.0",
+    "react-native-scripts": "1.14.0",
+    "react-test-renderer": "^16.3.2"
+  },
+  "jest": {
+    "preset": "jest-expo"
   },
   "private": true
 }
