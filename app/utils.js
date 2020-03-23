@@ -9,6 +9,10 @@ const utils = {
         fahrenheitTemp = Math.round(fahrenheitTemp);
         return fahrenheitTemp;
     },
+    toDate: (unix)=>{
+        let textContent=new Date(unix*1000).toLocaleTimeString();
+        return textContent;
+    },
 };
 
 export default utils;

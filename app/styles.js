@@ -14,8 +14,8 @@ const styles = StyleSheet.create({
     },
     weatherInfo: {
         textAlign: 'center',
-        fontSize: 20,
-        margin: 10,
+        fontSize: 16,
+        margin: 5,
         color: white,
     },
     searchbox: {
