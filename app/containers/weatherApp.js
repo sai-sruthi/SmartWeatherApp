@@ -17,6 +17,7 @@ export class WeatherApp extends Component {
             (position) => {
                 const lat = position.coords.latitude.toString();
                 const lon = position.coords.longitude.toString();
+                this.props.actions.setIsLocal(true);
                 this.props.actions.searchByCoordinates(lat, lon);
             },
             () => {
@@ -28,7 +29,7 @@ export class WeatherApp extends Component {
 
     render() {
         const { state, actions } = this.props;
-        const { weatherData, errorMessage, isLoading, isFahrenheit } = state;
+        const { weatherData, errorMessage, isLoading, isFahrenheit ,isLocal} = state;
         return (
           <View style={styles.container}>
             <SearchBox onComplete={actions.searchByCity} />
@@ -37,11 +38,13 @@ export class WeatherApp extends Component {
               errorMessage={errorMessage}
               isLoading={isLoading}
               isFahrenheit={isFahrenheit}
+              isLocal = {isLocal}
             />
             <Options
               style={styles.options}
               onValueChange={value => actions.setIsFahrenheit(value)}
               isFahrenheit={isFahrenheit}
+              isLocal = {isLocal}
             />
           </View>
         );
