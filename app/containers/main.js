@@ -8,6 +8,7 @@ import createLogger from 'redux-logger';
 
 import searchReducer from '../reducers/search';
 import WeatherApp from './weatherApp';
+import Welcome from '../components/welcome';
 
 const logger = createLogger();
 const store = createStore(searchReducer, composeWithDevTools(
@@ -16,7 +17,7 @@ const store = createStore(searchReducer, composeWithDevTools(
 
 const Main = () =>
     (<Provider store={store}>
-      <WeatherApp />
+      <Welcome />
     </Provider>);
 
 export default Main;
