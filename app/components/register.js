@@ -1,8 +1,9 @@
 import React from 'react';
 import { View, Text, TextInput, Switch, TouchableOpacity, StyleSheet } from 'react-native';
 import styles from '../styles';
+import { registerUser } from '../services/welcomeService';
 
-export default function Register({ user, setName, setUpdates, setBusinessUser }) {
+export default function Register({ user, setName, setPassword, setUpdates, setBusinessUser, registerUser }) {
     return (
         <View>
             <Text style={styles.sectionHeader}>Register</Text>
@@ -16,13 +17,13 @@ export default function Register({ user, setName, setUpdates, setBusinessUser })
                 secureTextEntry={true}
                 style={styles.input}
                 placeholder="Secret"
-                onChangeText={() => { }} />
+                onChangeText={setPassword} />
             <Text style={styles.label}>Confirm Password</Text>
             <TextInput
                 secureTextEntry={true}
                 style={styles.input}
                 placeholder="Secret"
-                onChangeText={() => { }} />
+                onChange={() => { }} />
             <Text style={styles.label}>Receive Promotional Notifications?</Text>
             <View style={styles.options, localStyles.wrapper}>
                 <View style={styles.optionWrapper}>
@@ -41,7 +42,7 @@ export default function Register({ user, setName, setUpdates, setBusinessUser })
             </View>
             <TouchableOpacity
                 style={styles.submit}
-                onPress={() => { }}>
+                onPress={registerUser}>
                 <Text style={styles.btnLabel}>Create Account</Text>
             </TouchableOpacity>
         </View>

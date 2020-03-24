@@ -2,7 +2,7 @@ import React from 'react';
 import { View, Text, TextInput, TouchableOpacity, StyleSheet } from 'react-native';
 import styles from '../styles';
 
-export default function Login() {
+export default function Login({ setName, setPassword, authenticateUser }) {
     return (
         <View>
             <Text style={styles.sectionHeader}>Login</Text>
@@ -10,16 +10,16 @@ export default function Login() {
             <TextInput
                 style={styles.input}
                 placeholder="eg. John Doe"
-                onChangeText={() => { }} />
+                onChangeText={setName} />
             <Text style={styles.label}>Password</Text>
             <TextInput
                 secureTextEntry={true}
                 style={styles.input}
                 placeholder="Secret"
-                onChangeText={() => { }} />
+                onChangeText={setPassword} />
             <TouchableOpacity
                 style={styles.submit}
-                onPress={() => { }}>
+                onPress={authenticateUser}>
                 <Text style={styles.btnLabel}>Login</Text>
             </TouchableOpacity>
         </View>
