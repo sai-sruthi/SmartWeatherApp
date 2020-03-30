@@ -5,6 +5,8 @@ import com.swe.smartweatherapi.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class UserService {
     private final UserRepository repository;
@@ -17,6 +19,24 @@ public class UserService {
     public User save(User user) {
         try {
             return repository.save(user);
+        } catch (Exception ex) {
+            // TODO: handle this later
+            return null;
+        }
+    }
+
+    public User getOne(Long userId) {
+        try {
+            return repository.getOne(userId);
+        } catch (Exception ex) {
+            // TODO: handle this later
+            return null;
+        }
+    }
+
+    public List<User> findAll() {
+        try {
+            return repository.findAll();
         } catch (Exception ex) {
             // TODO: handle this later
             return null;

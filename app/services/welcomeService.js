@@ -1,30 +1,58 @@
 import axios from 'axios';
 import config from '../../config';
+import { Notifications } from 'expo';
+import * as Permissions from 'expo-permissions';
 
-export function authenticateUser(user) {
+export const authenticateUser = (user, navigation) => {
+    let check = false;
     axios.post(config.server + '/users/authenticate/', user)
         .then(function (response) {
-            // evaluate response, redirect to home page
-            console.log(response);
+            // TODO: set context
+            check = response.data;
         })
         .catch(function (error) {
             // display a toast, ask to try again
+        })
+        .finally(function () {
+            if (check) {
+                navigation.navigate("Home");
+            } else {
+                // display a toast
+                console.log(check);
+            }
         });
 };
 
-export function registerUser(user) {
+export const registerUser = async (user, navigation) => {
+    const { status } = await Permissions.askAsync(Permissions.NOTIFICATIONS);
+    if (status !== 'granted') {
+        alert('No notification permissions!');
+        return;
+    }
+    user.userToken = await Notifications.getExpoPushTokenAsync();;
+    let check = false;
     navigator.geolocation.getCurrentPosition(
         (position) => {
             user.latitude = position.coords.latitude.toString();
             user.longitude = position.coords.longitude.toString();
-            console.log(user);
             axios.post(config.server + '/users/', user)
                 .then(function (response) {
-                    // display a toast, redirect to home page
-                    console.log(response);
+                    console.log(response.data);
+                    // TODO: set context
+                    if (response.data.userId !== undefined) {
+                        check = true;
+                    }
                 })
                 .catch(function (error) {
                     // display a toast, ask to try again
+                })
+                .finally(function () {
+                    if (check) {
+                        navigation.navigate("Home");
+                    } else {
+                        // display a toast
+                        console.log(check);
+                    }
                 });
         },
         () => {

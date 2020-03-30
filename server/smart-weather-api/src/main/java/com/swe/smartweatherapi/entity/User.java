@@ -15,12 +15,14 @@ public class User {
     private String userPswd;
     @Column(name = "updates")
     private Boolean updates;
-    @Column(name = "isBusinessUser")
+    @Column(name = "is_business_user")
     private Boolean isBusinessUser;
     @Column(name = "latitude")
-    private String latitude;
+    private Double latitude;
     @Column(name = "longitude")
-    private String longitude;
+    private Double longitude;
+    @Column(name = "user_token")
+    private String userToken;
 
     public Long getUserId() {
         return userId;
@@ -62,20 +64,28 @@ public class User {
         isBusinessUser = businessUser;
     }
 
-    public String getLatitude() {
+    public Double getLatitude() {
         return latitude;
     }
 
-    public void setLatitude(String latitude) {
+    public void setLatitude(Double latitude) {
         this.latitude = latitude;
     }
 
-    public String getLongitude() {
+    public Double getLongitude() {
         return longitude;
     }
 
-    public void setLongitude(String longitude) {
+    public void setLongitude(Double longitude) {
         this.longitude = longitude;
+    }
+
+    public String getUserToken() {
+        return userToken;
+    }
+
+    public void setUserToken(String userToken) {
+        this.userToken = userToken;
     }
 
     @Override
@@ -86,8 +96,9 @@ public class User {
         sb.append(", userPswd='").append(userPswd).append('\'');
         sb.append(", updates=").append(updates);
         sb.append(", isBusinessUser=").append(isBusinessUser);
-        sb.append(", latitude='").append(latitude).append('\'');
-        sb.append(", longitude='").append(longitude).append('\'');
+        sb.append(", latitude=").append(latitude);
+        sb.append(", longitude=").append(longitude);
+        sb.append(", userToken='").append(userToken).append('\'');
         sb.append('}');
         return sb.toString();
     }

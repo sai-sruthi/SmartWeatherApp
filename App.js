@@ -1,11 +1,15 @@
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
-import Main from './app/containers/main';
+import { StyleSheet } from 'react-native';
+import Navigator from './app/navigation/mainStack'
+import * as firebase from 'firebase';
+import config from './config';
+
+firebase.initializeApp(config.firebaseConfig);
 
 export default class App extends React.Component {
   render() {
     return (
-      <Main/>
+      <Navigator />
     );
   }
 }
