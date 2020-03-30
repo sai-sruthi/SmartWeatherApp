@@ -1,9 +1,10 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { View, Text, TouchableWithoutFeedback, Keyboard } from 'react-native';
 import styles from '../styles';
 import Login from '../components/login';
 import Register from '../components/register';
 import { authenticateUser as authUser, registerUser as regUser } from '../services/welcomeService';
+import { registerForPushNotifications } from '../services/notificationService';
 
 // TODO: create a reducer for all the functions
 // if time permits

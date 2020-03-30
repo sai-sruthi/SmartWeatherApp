@@ -1,7 +1,9 @@
 import axios from 'axios';
 import config from '../../config';
+import { Notifications } from 'expo';
+import * as Permissions from 'expo-permissions';
 
-export function authenticateUser(user, navigation) {
+export const authenticateUser = (user, navigation) => {
     let check = false;
     axios.post(config.server + '/users/authenticate/', user)
         .then(function (response) {
@@ -21,13 +23,18 @@ export function authenticateUser(user, navigation) {
         });
 };
 
-export function registerUser(user, navigation) {
+export const registerUser = async (user, navigation) => {
+    const { status } = await Permissions.askAsync(Permissions.NOTIFICATIONS);
+    if (status !== 'granted') {
+        alert('No notification permissions!');
+        return;
+    }
+    user.userToken = await Notifications.getExpoPushTokenAsync();;
     let check = false;
     navigator.geolocation.getCurrentPosition(
         (position) => {
             user.latitude = position.coords.latitude.toString();
             user.longitude = position.coords.longitude.toString();
-            console.log(user);
             axios.post(config.server + '/users/', user)
                 .then(function (response) {
                     console.log(response.data);
