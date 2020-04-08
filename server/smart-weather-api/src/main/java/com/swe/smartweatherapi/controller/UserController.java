@@ -22,7 +22,6 @@ public class UserController {
             value = "/",
             method = RequestMethod.POST)
     public ResponseEntity save(@RequestBody User user) {
-        System.out.println(user);
         return ResponseEntity
                 .status(HttpStatus.OK)
                 .body(service.save(user));

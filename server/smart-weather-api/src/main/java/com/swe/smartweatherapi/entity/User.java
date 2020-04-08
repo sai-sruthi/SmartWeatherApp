@@ -1,5 +1,7 @@
 package com.swe.smartweatherapi.entity;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import javax.persistence.*;
 
 @Entity
@@ -16,6 +18,7 @@ public class User {
     @Column(name = "updates")
     private Boolean updates;
     @Column(name = "is_business_user")
+    @JsonProperty(value = "isBusinessUser")
     private Boolean isBusinessUser;
     @Column(name = "latitude")
     private Double latitude;
