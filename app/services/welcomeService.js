@@ -2,10 +2,16 @@ import axios from 'axios';
 import config from '../../config';
 import { Notifications } from 'expo';
 import * as Permissions from 'expo-permissions';
+import { AsyncStorage } from 'react-native';
+
+const setContext = async (loggedIn, user) => {
+    await AsyncStorage.setItem("loggedIn", JSON.stringify(loggedIn));
+    await AsyncStorage.setItem("user", JSON.stringify(user));
+};
 
 export const authenticateUser = (user, navigation) => {
     let check = false;
-    axios.post(config.server + '/users/authenticate/', user)
+    axios.post(config.server + "/users/authenticate/", user)
         .then(function (response) {
             // TODO: set context
             check = response.data;
@@ -15,6 +21,7 @@ export const authenticateUser = (user, navigation) => {
         })
         .finally(function () {
             if (check) {
+                setContext(true, user);
                 navigation.navigate("Home");
             } else {
                 // display a toast
@@ -25,17 +32,17 @@ export const authenticateUser = (user, navigation) => {
 
 export const registerUser = async (user, navigation) => {
     const { status } = await Permissions.askAsync(Permissions.NOTIFICATIONS);
-    if (status !== 'granted') {
-        alert('No notification permissions!');
+    if (status !== "granted") {
+        alert("Please enable notifications!");
         return;
     }
-    user.userToken = await Notifications.getExpoPushTokenAsync();;
+    user.userToken = await Notifications.getExpoPushTokenAsync();
     let check = false;
     navigator.geolocation.getCurrentPosition(
         (position) => {
             user.latitude = position.coords.latitude.toString();
             user.longitude = position.coords.longitude.toString();
-            axios.post(config.server + '/users/', user)
+            axios.post(config.server + "/users/", user)
                 .then(function (response) {
                     console.log(response.data);
                     // TODO: set context
@@ -48,6 +55,7 @@ export const registerUser = async (user, navigation) => {
                 })
                 .finally(function () {
                     if (check) {
+                        setContext(true, user);
                         navigation.navigate("Home");
                     } else {
                         // display a toast

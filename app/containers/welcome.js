@@ -13,7 +13,7 @@ export default function Welcome({ navigation }) {
         userName: "",
         userPswd: "",
         updates: false,
-        businessUser: false,
+        isBusinessUser: false,
     });
     const setName = (value) => {
         setUser({
@@ -36,7 +36,7 @@ export default function Welcome({ navigation }) {
     const setBusinessUser = (value) => {
         setUser({
             ...user,
-            businessUser: value
+            isBusinessUser: value
         });
     }
     const authenticateUser = () => {
@@ -66,7 +66,8 @@ export default function Welcome({ navigation }) {
                     setPassword={setPassword}
                     setUpdates={setUpdates}
                     setBusinessUser={setBusinessUser}
-                    registerUser={registerUser} />
+                    registerUser={registerUser}
+                    navigation={navigation} />
             </View>
         </TouchableWithoutFeedback>
     );

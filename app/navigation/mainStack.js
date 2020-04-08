@@ -10,8 +10,19 @@ function Navigator() {
     return (
         <NavigationContainer>
             <Stack.Navigator initialRouteName="Welcome">
-                <Stack.Screen name="Welcome" component={Welcome} />
-                <Stack.Screen name="Home" component={Main} />
+                <Stack.Screen name="Welcome" component={Welcome} options={{
+                    title: "",
+                    headerStyle: {
+                        height: 0
+                    }
+                }} />
+                <Stack.Screen name="Home" component={Main} options={{
+                    headerLeft: null,
+                    title: "",
+                    headerStyle: {
+                        height: 0
+                    }
+                }} />
             </Stack.Navigator>
         </NavigationContainer>
     );

@@ -10,9 +10,7 @@ import searchReducer from '../reducers/search';
 import WeatherApp from './weatherApp';
 
 const logger = createLogger();
-const store = createStore(searchReducer, composeWithDevTools(
-    applyMiddleware(thunk, promise, logger),
-));
+const store = createStore(searchReducer, applyMiddleware(thunk, promise, logger));
 
 const Main = () =>
     (<Provider store={store}>
