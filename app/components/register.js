@@ -1,9 +1,18 @@
-import React from 'react';
-import { View, Text, TextInput, Switch, TouchableOpacity, StyleSheet } from 'react-native';
+import React, { useEffect } from 'react';
+import { View, Text, TextInput, Switch, TouchableOpacity, StyleSheet, AsyncStorage } from 'react-native';
 import styles from '../styles';
 import { registerUser } from '../services/welcomeService';
 
-export default function Register({ user, setName, setPassword, setUpdates, setBusinessUser, registerUser }) {
+export default function Register({ user, setName, setPassword, setUpdates, setBusinessUser, registerUser, navigation }) {
+    useEffect(() => {
+        async function checkIfLoggedIn() {
+            const loggedIn = await AsyncStorage.getItem("loggedIn");
+            if (JSON.parse(loggedIn)) {
+                navigation.navigate("Home");
+            }
+        }
+        checkIfLoggedIn();
+    }, []);
     return (
         <View>
             <Text style={styles.sectionHeader}>Register</Text>
@@ -36,7 +45,7 @@ export default function Register({ user, setName, setPassword, setUpdates, setBu
             <View style={styles.options, localStyles.wrapper}>
                 <View style={styles.optionWrapper}>
                     <Text style={localStyles.option}>{'Nay'}</Text>
-                    <Switch value={user.businessUser} onValueChange={setBusinessUser} />
+                    <Switch value={user.isBusinessUser} onValueChange={setBusinessUser} />
                     <Text style={localStyles.option}>{'Yay'}</Text>
                 </View>
             </View>
