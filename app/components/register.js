@@ -1,18 +1,9 @@
 import React, { useEffect } from 'react';
-import { View, Text, TextInput, Switch, TouchableOpacity, StyleSheet, AsyncStorage } from 'react-native';
+import { View, Text, TextInput, Switch, TouchableOpacity, StyleSheet } from 'react-native';
 import styles from '../styles';
 import { registerUser } from '../services/welcomeService';
 
-export default function Register({ user, setName, setPassword, setUpdates, setBusinessUser, registerUser, navigation }) {
-    useEffect(() => {
-        async function checkIfLoggedIn() {
-            const loggedIn = await AsyncStorage.getItem("loggedIn");
-            if (JSON.parse(loggedIn)) {
-                navigation.navigate("Home");
-            }
-        }
-        checkIfLoggedIn();
-    }, []);
+export default function Register({ user, setName, setPassword, setUpdates, setBusinessUser, registerUser }) {
     return (
         <View>
             <Text style={styles.sectionHeader}>Register</Text>

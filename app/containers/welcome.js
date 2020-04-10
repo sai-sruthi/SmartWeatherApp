@@ -1,14 +1,32 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, TouchableWithoutFeedback, Keyboard } from 'react-native';
+import { View, Text, TouchableWithoutFeedback, Keyboard, AsyncStorage } from 'react-native';
 import styles from '../styles';
 import Login from '../components/login';
 import Register from '../components/register';
-import { authenticateUser as authUser, registerUser as regUser } from '../services/welcomeService';
-import { registerForPushNotifications } from '../services/notificationService';
+import { authenticateUser as authUser, registerUser as regUser, saveUser } from '../services/welcomeService';
+import { Notifications } from 'expo';
 
 // TODO: create a reducer for all the functions
 // if time permits
 export default function Welcome({ navigation }) {
+    useEffect(() => {
+        async function checkIfLoggedIn() {
+            const loggedIn = await AsyncStorage.getItem("loggedIn");
+            if (JSON.parse(loggedIn)) {
+                token = await Notifications.getExpoPushTokenAsync();
+                const temp = await AsyncStorage.getItem("user");
+                let user = JSON.parse(temp);
+                if (user.userToken != token) {
+                    await saveUser(user, navigation, false);
+                    await AsyncStorage.removeItem("user");
+                    user.userToken = token;
+                    await AsyncStorage.setItem("user", JSON.stringify(user));
+                }
+                navigation.navigate("Home");
+            }
+        }
+        checkIfLoggedIn();
+    }, []);
     const [user, setUser] = useState({
         userName: "",
         userPswd: "",
@@ -66,8 +84,7 @@ export default function Welcome({ navigation }) {
                     setPassword={setPassword}
                     setUpdates={setUpdates}
                     setBusinessUser={setBusinessUser}
-                    registerUser={registerUser}
-                    navigation={navigation} />
+                    registerUser={registerUser} />
             </View>
         </TouchableWithoutFeedback>
     );
