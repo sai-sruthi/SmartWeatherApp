@@ -13,15 +13,14 @@ export const authenticateUser = (user, navigation) => {
     let check = false;
     axios.post(config.server + "/users/authenticate/", user)
         .then(function (response) {
-            // TODO: set context
             check = response.data;
         })
         .catch(function (error) {
             // display a toast, ask to try again
         })
         .finally(function () {
-            if (check) {
-                setContext(true, user);
+            if (check.check) {
+                setContext(check.check, check.user);
                 navigation.navigate("Home");
             } else {
                 // display a toast
@@ -30,6 +29,29 @@ export const authenticateUser = (user, navigation) => {
         });
 };
 
+export const saveUser = async (user, navigation, navigate) => {
+    let check = false;
+    axios.post(config.server + "/users/", user)
+    .then(function (response) {
+            if (response.data.userId !== undefined) {
+                check = true;
+                user = response.data;
+            }
+    })
+    .catch(function (error) {
+        // display a toast, ask to try again
+    })
+    .finally(function () {
+        if (check && navigate) {
+            setContext(check, user);
+            navigation.navigate("Home");
+        } else {
+            // display a toast
+            console.log(check);
+        }
+    });
+}
+
 export const registerUser = async (user, navigation) => {
     const { status } = await Permissions.askAsync(Permissions.NOTIFICATIONS);
     if (status !== "granted") {
@@ -37,31 +59,11 @@ export const registerUser = async (user, navigation) => {
         return;
     }
     user.userToken = await Notifications.getExpoPushTokenAsync();
-    let check = false;
     navigator.geolocation.getCurrentPosition(
         (position) => {
             user.latitude = position.coords.latitude.toString();
             user.longitude = position.coords.longitude.toString();
-            axios.post(config.server + "/users/", user)
-                .then(function (response) {
-                    console.log(response.data);
-                    // TODO: set context
-                    if (response.data.userId !== undefined) {
-                        check = true;
-                    }
-                })
-                .catch(function (error) {
-                    // display a toast, ask to try again
-                })
-                .finally(function () {
-                    if (check) {
-                        setContext(true, user);
-                        navigation.navigate("Home");
-                    } else {
-                        // display a toast
-                        console.log(check);
-                    }
-                });
+            saveUser(user, navigation, true);
         },
         () => {
             // handle this later

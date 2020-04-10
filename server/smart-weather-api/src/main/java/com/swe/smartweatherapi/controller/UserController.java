@@ -7,6 +7,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
+import java.util.Map;
+
 @RestController
 @CrossOrigin(value = "*")
 @RequestMapping(value = "/users")
@@ -32,9 +35,15 @@ public class UserController {
             method = RequestMethod.POST
     )
     public ResponseEntity authenticateUser(@RequestBody User user) {
+        boolean check = service.authenticateUser(user);
+        Map<String, Object> map = new HashMap<>();
+        map.put("check", (boolean) check);
+        if (check) {
+            map.put("user", service.getOne(user.getUserId()));
+        }
         return ResponseEntity
                 .status(HttpStatus.OK)
-                .body(service.authenticateUser(user));
+                .body(map);
     }
 
 }
