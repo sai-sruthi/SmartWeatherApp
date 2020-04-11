@@ -4,7 +4,6 @@ import Icon from 'react-native-vector-icons/Ionicons';
 import _ from 'lodash';
 import styles from '../styles';
 import utils from '../utils';
-import { TouchableOpacity } from 'react-native-gesture-handler';
 
 const genIcon = (description, sys) => {
     const { sunrise, sunset } = sys;
@@ -62,7 +61,7 @@ const renderContent = (weatherData, isFahrenheit, isLocal) =>
                     <Text style={styles.weatherInfo}>Humidty: {`${weatherData.main.humidity}`} %</Text>
                     <Text style={styles.weatherInfo}>{isLocal ? `Sunrise : ${utils.toDate(weatherData.sys.sunrise)}, Sunset: ${utils.toDate(weatherData.sys.sunset)}` : ''}</Text>
                 </View>
-            }
+            }                
         </View>
     );
 
@@ -73,31 +72,13 @@ const renderError = errorMessage =>
         </View>
     );
 
-const notificationButton = () => (
-    <TouchableOpacity
-        style={styles.submit}
-        onPress={() => {}}>
-        <Text style={styles.btnLabel}>Create discount notification</Text>
-    </TouchableOpacity>
-);
-
 const WeatherInfo = (props) => {
-    // let createNotification = (<Text></Text>);
-    // useEffect(() => {
-    //     async function checkIfLoggedIn(){
-    //         const user = await AsyncStorage.getItem("user");
-    //         if (!JSON.parse(user).isBusinessUser) {
-    //             createNotification = notificationButton();
-    //         }
-    //     }
-    //     checkIfLoggedIn();
-    // }, []);
     const { weatherData, isFahrenheit, isLocal, errorMessage, isLoading } = props;
     const stuff =
         renderContent(weatherData, isFahrenheit, isLocal)
     return (
         <View style={styles.textContainer}>
-            { stuff }
+            {stuff}
         </View>
     );
 };

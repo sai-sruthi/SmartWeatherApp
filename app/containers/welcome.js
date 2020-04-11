@@ -16,11 +16,13 @@ export default function Welcome({ navigation }) {
                 token = await Notifications.getExpoPushTokenAsync();
                 const temp = await AsyncStorage.getItem("user");
                 let user = JSON.parse(temp);
-                if (user.userToken != token) {
-                    await saveUser(user, navigation, false);
-                    await AsyncStorage.removeItem("user");
-                    user.userToken = token;
-                    await AsyncStorage.setItem("user", JSON.stringify(user));
+                if (user != null) {
+                    if (user.userToken != token) {
+                        await saveUser(user, navigation, false);
+                        await AsyncStorage.removeItem("user");
+                        user.userToken = token;
+                        await AsyncStorage.setItem("user", JSON.stringify(user));
+                    }
                 }
                 navigation.navigate("Home");
             }
@@ -68,7 +70,7 @@ export default function Welcome({ navigation }) {
             onPress={() => {
                 Keyboard.dismiss();
             }}>
-            <View style={styles.loginContainer}>
+            <View style={styles.mainContainer}>
                 <Login
                     setName={setName}
                     setPassword={setPassword}
