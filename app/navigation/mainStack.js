@@ -3,6 +3,7 @@ import { createStackNavigator } from '@react-navigation/stack';
 import { NavigationContainer } from '@react-navigation/native';
 import Welcome from '../containers/welcome';
 import Main from '../containers/main';
+import Settings from '../components/settings';
 
 const Stack = createStackNavigator();
 
@@ -17,6 +18,13 @@ function Navigator() {
                     }
                 }} />
                 <Stack.Screen name="Home" component={Main} options={{
+                    headerLeft: null,
+                    title: "",
+                    headerStyle: {
+                        height: 0
+                    }
+                }} />
+                <Stack.Screen name="Settings" component={Settings} options={{
                     headerLeft: null,
                     title: "",
                     headerStyle: {

@@ -35,11 +35,12 @@ public class UserController {
             method = RequestMethod.POST
     )
     public ResponseEntity authenticateUser(@RequestBody User user) {
-        boolean check = service.authenticateUser(user);
+        user = service.authenticateUser(user);
         Map<String, Object> map = new HashMap<>();
+        boolean check = user != null ? true : false;
         map.put("check", (boolean) check);
         if (check) {
-            map.put("user", service.getOne(user.getUserId()));
+            map.put("user", user);
         }
         return ResponseEntity
                 .status(HttpStatus.OK)

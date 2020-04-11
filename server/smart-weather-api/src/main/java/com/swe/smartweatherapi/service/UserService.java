@@ -43,14 +43,10 @@ public class UserService {
         }
     }
 
-    public Boolean authenticateUser(User user) {
+    public User authenticateUser(User user) {
         try {
-            if (repository.authenticateUser(user.getUserName(),
-                    user.getUserPswd()) != null) {
-                return true;
-            } else {
-                return false;
-            }
+            return repository.authenticateUser(user.getUserName(),
+                    user.getUserPswd());
         } catch (Exception ex) {
             // TODO: handle this later
             return null;

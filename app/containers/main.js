@@ -12,9 +12,10 @@ import WeatherApp from './weatherApp';
 const logger = createLogger();
 const store = createStore(searchReducer, applyMiddleware(thunk, promise, logger));
 
-const Main = () =>
-    (<Provider store={store}>
-      <WeatherApp />
-    </Provider>);
+const Main = ({ navigation }) =>
+  (<Provider store={store}>
+    <WeatherApp
+      navigation={navigation} />
+  </Provider>);
 
 export default Main;

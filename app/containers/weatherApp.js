@@ -1,5 +1,5 @@
 import React, { Component, PropTypes } from 'react';
-import { View } from 'react-native';
+import { View, Text, TouchableOpacity, AsyncStorage } from 'react-native';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import WeatherInfo from '../components/weatherInfo';
@@ -10,6 +10,13 @@ import * as weatherActions from '../actions';
 
 export class WeatherApp extends Component {
     static propTypes = {
+    }
+
+    user = null;
+
+    getUser = async () => {
+      const temp = await AsyncStorage.getItem("user");
+      this.user = JSON.parse(temp);
     }
 
     componentDidMount() {
@@ -25,10 +32,11 @@ export class WeatherApp extends Component {
                 this.props.actions.setErrorMessage(errorMessage);
             },
             { enableHighAccuracy: true, timeout: 20000, maximumAge: 1000 });
+        this.getUser();
     }
 
     render() {
-        const { state, actions } = this.props;
+        const { state, actions, navigation } = this.props;
         const { weatherData, errorMessage, isLoading, isFahrenheit ,isLocal} = state;
         return (
           <View style={styles.container}>
@@ -46,6 +54,26 @@ export class WeatherApp extends Component {
               isFahrenheit={isFahrenheit}
               isLocal = {isLocal}
             />
+            <TouchableOpacity
+                style={styles.submit}
+                onPress={() => {
+                    if (this.user == null) {
+                      // this happens if user has not given
+                      // or revoked location permission
+                      // the prompt for location pops up
+                      // which affects the retrieval of
+                      // the user from the async storage
+                      prereq = async () => {
+                        await this.getUser();
+                        navigation.navigate("Settings", {user: this.user});
+                      }
+                      prereq();
+                    } else {
+                      navigation.navigate("Settings", {user: this.user});
+                    }
+                }}>
+                <Text style={styles.btnLabel}>CHANGE NOTIFICATION SETTINGS</Text>
+            </TouchableOpacity> 
           </View>
         );
     }

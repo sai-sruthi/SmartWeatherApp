@@ -67,7 +67,7 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
     },
-    loginContainer: {
+    mainContainer: {
         flex: 1,
         backgroundColor: '#5DBCD2',
         textAlign: 'center',
@@ -82,6 +82,15 @@ const styles = StyleSheet.create({
         paddingHorizontal: 10,
         backgroundColor: '#FFFFFF',
     },
+    largeInput: {
+        borderColor: '#FFFFFF',
+        borderRadius: 10,
+        borderWidth: 2,
+        marginBottom: 15,
+        marginHorizontal: 40,
+        paddingHorizontal: 10,
+        backgroundColor: '#FFFFFF',
+    },    
     label: {
         alignSelf: 'center',
         color: '#FFFFFF',
@@ -109,7 +118,7 @@ const styles = StyleSheet.create({
         padding: 8,
         borderRadius: 10,
         marginBottom: 20,
-    }    
+    }
 });
 
 export default styles;
