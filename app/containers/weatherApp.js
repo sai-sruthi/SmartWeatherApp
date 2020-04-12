@@ -57,20 +57,16 @@ export class WeatherApp extends Component {
             <TouchableOpacity
                 style={styles.submit}
                 onPress={() => {
-                    if (this.user == null) {
-                      // this happens if user has not given
-                      // or revoked location permission
-                      // the prompt for location pops up
-                      // which affects the retrieval of
-                      // the user from the async storage
-                      prereq = async () => {
-                        await this.getUser();
-                        navigation.navigate("Settings", {user: this.user});
-                      }
-                      prereq();
-                    } else {
-                      navigation.navigate("Settings", {user: this.user});
-                    }
+                  // this is needed because in certain
+                  // scenarios (2 as of now), the updated
+                  // user value stored in the async storage
+                  // is not set to the class variable before
+                  // it is passed to the settings screen
+                  prereq = async () => {
+                    await this.getUser();
+                    navigation.navigate("Settings", {user: this.user});
+                  }
+                  prereq();
                 }}>
                 <Text style={styles.btnLabel}>CHANGE NOTIFICATION SETTINGS</Text>
             </TouchableOpacity> 
