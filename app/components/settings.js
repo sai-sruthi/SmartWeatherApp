@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { View, Text, AsyncStorage, TouchableOpacity, TextInput, StyleSheet, Switch } from 'react-native';
 import styles from '../styles';
 import { saveUser } from '../services/welcomeService';
+import { sendNotifications } from '../services/notificationService';
 
 // TODO: save user preference to the db and async storage
 const togglePromotionalNotifications =
@@ -23,25 +24,48 @@ const togglePromotionalNotifications =
         </View>
     );
 
-// TODO: make the appropriate call
-const createPromotionalNotification = () => (
+const createPromotionalNotification = (userId, notification, setNotification) => (
     <View
         style={styles.wrapper}>
         <Text
             style={styles.label}>
             Create a promotional notification
-        </Text>
+            </Text>
         <TextInput
             placeholder="Title"
+            value={notification.title}
+            onChangeText={(value) => {
+                setNotification({
+                    ...notification,
+                    title: value
+                })
+            }}
             style={styles.largeInput}>
         </TextInput>
         <TextInput
-            placeholder="Message"
+            placeholder="Body"
+            value={notification.body}
+            onChangeText={(value) => {
+                setNotification({
+                    ...notification,
+                    body: value
+                })
+            }}
             style={styles.largeInput}>
         </TextInput>
         <TouchableOpacity
             style={styles.submit}
-            onPress={() => { }}>
+            onPress={() => {
+                async function send() {
+                    await sendNotifications(userId, notification);
+                    setNotification({
+                        to: [],
+                        title: "",
+                        body: ""
+                    })
+                };
+                send();
+            }}>
             <Text style={styles.btnLabel}>Create discount notification</Text>
         </TouchableOpacity>
     </View>
@@ -50,6 +74,11 @@ const createPromotionalNotification = () => (
 export default function Settings({ route, navigation }) {
     let temp = route.params.user;
     const [user, setUser] = useState(temp);
+    const [notification, setNotification] = useState({
+        to: [],
+        title: "",
+        body: ""
+    });
     const updatePreference = () => {
         setUser({
             ...user,
@@ -71,7 +100,7 @@ export default function Settings({ route, navigation }) {
     let toggleNotifications =
         togglePromotionalNotifications(user, updatePreference, savePreference);
     let createNotification = user.isBusinessUser ? (
-        createPromotionalNotification()
+        createPromotionalNotification(user.userId, notification, setNotification)
     ) : (<View></View>);
     return (
         <View style={styles.mainContainer}>

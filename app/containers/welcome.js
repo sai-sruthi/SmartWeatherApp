@@ -10,6 +10,8 @@ import { Notifications } from 'expo';
 // if time permits
 export default function Welcome({ navigation }) {
     useEffect(() => {
+        // TODO: compare token with db token instead of
+        // the token stored in async storage
         async function checkIfLoggedIn() {
             const loggedIn = await AsyncStorage.getItem("loggedIn");
             if (JSON.parse(loggedIn)) {
@@ -18,13 +20,15 @@ export default function Welcome({ navigation }) {
                 let user = JSON.parse(temp);
                 if (user != null) {
                     if (user.userToken != token) {
+                        user.userToken = token;
                         await saveUser(user, navigation, false);
                         await AsyncStorage.removeItem("user");
-                        user.userToken = token;
                         await AsyncStorage.setItem("user", JSON.stringify(user));
+                        navigation.navigate("Home");                        
+                    } else {
+                        navigation.navigate("Home");                        
                     }
                 }
-                navigation.navigate("Home");
             }
         }
         checkIfLoggedIn();
