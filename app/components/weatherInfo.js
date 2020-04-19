@@ -1,5 +1,5 @@
-import React, { PropTypes } from 'react';
-import { Text, View } from 'react-native';
+import React, { PropTypes, useEffect } from 'react';
+import { Text, View, AsyncStorage } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 import _ from 'lodash';
 import styles from '../styles';
@@ -39,40 +39,47 @@ const genIcon = (description, sys) => {
     return icon;
 };
 
-const renderContent = (weatherData, isFahrenheit) =>
+const renderContent = (weatherData, isFahrenheit, isLocal) =>
     (
-      <View>
-        { _.isEmpty(weatherData) ?
-          <Text style={styles.weatherInfo}>{'Search for a location'}</Text>
-          :
-          <View>
-            <Text style={styles.weatherInfo}>{`${weatherData.name}`}</Text>
-            <Text style={styles.weatherInfo}>{
-                isFahrenheit ?
-                `${utils.toFahrenheit(weatherData.main.temp)} °F` :
-                `${utils.toCelsius(weatherData.main.temp)} °C`}</Text>
-            {genIcon(weatherData.weather[0].main, weatherData.sys)}
-            <Text style={styles.weatherInfo}>{`${weatherData.weather[0].description}`}</Text>
-          </View>
-        }
-      </View>
+        <View>
+            {_.isEmpty(weatherData) ?
+                <Text style={styles.weatherInfo}>{'Search for a location'}</Text>
+                :
+                <View>
+                    <Text style={styles.weatherInfo}>{`${weatherData.name}`}</Text>
+                    <Text style={styles.weatherInfo}>{
+                        isFahrenheit ?
+                            `${utils.toFahrenheit(weatherData.main.temp)} °F` :
+                            `${utils.toCelsius(weatherData.main.temp)} °C`}</Text>
+                    {genIcon(weatherData.weather[0].main, weatherData.sys)}
+                    <Text style={styles.weatherInfo}>Feels Like: {
+                        isFahrenheit ?
+                            `${utils.toFahrenheit(weatherData.main.feels_like)} °F` :
+                            `${utils.toCelsius(weatherData.main.feels_like)} °C`}</Text>
+                    <Text style={styles.weatherInfo}>{`${weatherData.weather[0].description}`}</Text>
+                    <Text style={styles.weatherInfo}>Wind Speed: {`${weatherData.wind.speed}`} m/sec</Text>
+                    <Text style={styles.weatherInfo}>Humidty: {`${weatherData.main.humidity}`} %</Text>
+                    <Text style={styles.weatherInfo}>{isLocal ? `Sunrise : ${utils.toDate(weatherData.sys.sunrise)}, Sunset: ${utils.toDate(weatherData.sys.sunset)}` : ''}</Text>
+                </View>
+            }                
+        </View>
     );
 
 const renderError = errorMessage =>
     (
-      <View style={styles.errorContainer}>
-        <Text style={styles.errorMessage}>{errorMessage}</Text>
-      </View>
+        <View style={styles.errorContainer}>
+            <Text style={styles.errorMessage}>{errorMessage}</Text>
+        </View>
     );
 
 const WeatherInfo = (props) => {
-    const { weatherData, isFahrenheit, errorMessage, isLoading } = props;
-    const stuff = 
-        renderContent(weatherData, isFahrenheit) 
+    const { weatherData, isFahrenheit, isLocal, errorMessage, isLoading } = props;
+    const stuff =
+        renderContent(weatherData, isFahrenheit, isLocal)
     return (
-      <View style={styles.textContainer}>
-       { stuff}
-      </View>
+        <View style={styles.textContainer}>
+            {stuff}
+        </View>
     );
 };
 

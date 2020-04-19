@@ -7,6 +7,7 @@ export const UPDATE_WEATHER_DATA = 'UPDATE_WEATHER_DATA';
 export const SET_ERROR_MESSAGE = 'SET_ERROR_MESSAGE';
 export const SET_IS_LOADING = 'SET_IS_LOADING';
 export const SET_IS_FAHRENHEIT = 'SET_IS_FAHRENHEIT';
+export const SET_IS_LOCAL='SET_IS_LOCAL';
 
 /**
  * updateSearchTerm - set new search term
@@ -68,15 +69,28 @@ export function setIsFahrenheit(isFahrenheit) {
     };
 }
 
+/**
+ * setIsLocal - to set local city or not
+ * @param {Boolean} isLocal
+ * @return {object} Action
+ */
+export function setIsLocal(isLocal){
+    return{
+        type:SET_IS_LOCAL,
+        isLocal,
+    };
+}
+
 export function searchByCity(searchTerm) {
     return (dispatch) => {
         const { appid, url } = config;
-        dispatch(setIsLoading(true));
+        dispatch(setIsLoading(true)); 
         return fetch(`${url}?q=${searchTerm}&appid=${appid}`)
             .then(response => response.json())
             .then((data) => {
                 dispatch(setErrorMessage(''));
                 dispatch(setIsLoading(false));
+                dispatch(setIsLocal(false));
                 dispatch(updateWeatherData(data));
             })
             .catch(() => {
@@ -95,6 +109,7 @@ export function searchByCoordinates(latitude, longitude) {
             .then((data) => {
                 dispatch(setErrorMessage(''));
                 dispatch(setIsLoading(false));
+                dispatch(setIsLocal(true));
                 dispatch(updateWeatherData(data));
             })
             .catch(() => {

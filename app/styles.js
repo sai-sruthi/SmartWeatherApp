@@ -14,8 +14,8 @@ const styles = StyleSheet.create({
     },
     weatherInfo: {
         textAlign: 'center',
-        fontSize: 20,
-        margin: 10,
+        fontSize: 16,
+        margin: 5,
         color: white,
     },
     searchbox: {
@@ -29,6 +29,7 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         alignSelf: 'stretch',
         backgroundColor: white,
+        borderRadius: 10,
     },
     searchContainer: {
         flex: 1,
@@ -66,6 +67,58 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
     },
+    mainContainer: {
+        flex: 1,
+        backgroundColor: '#5DBCD2',
+        textAlign: 'center',
+        justifyContent: 'center',
+    },
+    input: {
+        borderColor: '#FFFFFF',
+        borderRadius: 10,
+        borderWidth: 2,
+        marginBottom: 15,
+        marginHorizontal: 70,
+        paddingHorizontal: 10,
+        backgroundColor: '#FFFFFF',
+    },
+    largeInput: {
+        borderColor: '#FFFFFF',
+        borderRadius: 10,
+        borderWidth: 2,
+        marginBottom: 15,
+        marginHorizontal: 40,
+        paddingHorizontal: 10,
+        backgroundColor: '#FFFFFF',
+    },    
+    label: {
+        alignSelf: 'center',
+        color: '#FFFFFF',
+        fontSize: 14,
+        fontWeight: 'bold',
+        marginBottom: 10,
+    },
+    btnLabel: {
+        alignSelf: 'center',
+        color: '#5DBCD2',
+        fontSize: 14,
+        fontWeight: 'bold',
+    },
+    sectionHeader: {
+        alignSelf: 'center',
+        color: '#FFFFFF',
+        fontSize: 22,
+        fontWeight: 'bold',
+        marginBottom: 10,
+    },
+    submit: {
+        backgroundColor: '#EFEFEF',
+        alignSelf: 'center',
+        marginTop: 10,
+        padding: 8,
+        borderRadius: 10,
+        marginBottom: 20,
+    }
 });
 
 export default styles;

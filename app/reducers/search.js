@@ -4,6 +4,7 @@ import {
     SET_ERROR_MESSAGE,
     SET_IS_LOADING,
     SET_IS_FAHRENHEIT,
+    SET_IS_LOCAL,
 } from '../actions';
 
 const initialState = {
@@ -12,6 +13,7 @@ const initialState = {
     errorMessage: '',
     isLoading: false,
     isFahrenheit: false,
+    isLocal:true,
 };
 
 const searchReducer = (state = initialState, action = {}) => {
@@ -39,6 +41,11 @@ const searchReducer = (state = initialState, action = {}) => {
         case SET_IS_FAHRENHEIT: {
             return Object.assign({}, state, {
                 isFahrenheit: action.isFahrenheit,
+            });
+        }
+        case SET_IS_LOCAL: {
+            return Object.assign({},state,{
+                isLocal:action.isLocal,
             });
         }
         default:
