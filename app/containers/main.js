@@ -8,14 +8,17 @@ import createLogger from 'redux-logger';
 
 import searchReducer from '../reducers/search';
 import WeatherApp from './weatherApp';
+import { ScrollView } from 'react-native';
 
 const logger = createLogger();
 const store = createStore(searchReducer, applyMiddleware(thunk, promise, logger));
 
 const Main = ({ navigation }) =>
   (<Provider store={store}>
-    <WeatherApp
-      navigation={navigation} />
+    <ScrollView>
+      <WeatherApp
+        navigation={navigation} />    
+    </ScrollView>
   </Provider>);
 
 export default Main;
