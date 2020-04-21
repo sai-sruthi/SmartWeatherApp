@@ -47,7 +47,7 @@ const renderContent = (weatherData, isFahrenheit, isLocal) =>
                 :
                 <View>
                     <Text style={styles.weatherInfo}>{`${weatherData.name}`}</Text>
-                    <Text style={styles.weatherInfo}>{
+                    <Text style={styles.weatherInfoLarge}>{
                         isFahrenheit ?
                             `${utils.toFahrenheit(weatherData.main.temp)} °F` :
                             `${utils.toCelsius(weatherData.main.temp)} °C`}</Text>
@@ -56,7 +56,7 @@ const renderContent = (weatherData, isFahrenheit, isLocal) =>
                         isFahrenheit ?
                             `${utils.toFahrenheit(weatherData.main.feels_like)} °F` :
                             `${utils.toCelsius(weatherData.main.feels_like)} °C`}</Text>
-                    <Text style={styles.weatherInfo}>{`${weatherData.weather[0].description}`}</Text>
+                    <Text style={styles.weatherInfo}>{`${weatherData.weather[0].description[0].toUpperCase()}`+`${weatherData.weather[0].description.slice(1)}`}</Text>
                     <Text style={styles.weatherInfo}>Wind Speed: {`${weatherData.wind.speed}`} m/sec</Text>
                     <Text style={styles.weatherInfo}>Humidty: {`${weatherData.main.humidity}`} %</Text>
                     <Text style={styles.weatherInfo}>{isLocal ? `Sunrise : ${utils.toDate(weatherData.sys.sunrise)}, Sunset: ${utils.toDate(weatherData.sys.sunset)}` : ''}</Text>

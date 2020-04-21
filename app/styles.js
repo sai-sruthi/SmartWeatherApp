@@ -1,4 +1,4 @@
-import { StyleSheet } from 'react-native';
+import { Dimensions, StyleSheet } from 'react-native';
 
 const gray = '#cccccc';
 const blue = '#5DBCD2';
@@ -7,14 +7,21 @@ const red = '#ff4444';
 const pink = '#ffaaaa';
 const styles = StyleSheet.create({
     container: {
-        flex: 3,
+        height: Dimensions.get('window').height,
         justifyContent: 'center',
         alignItems: 'center',
         backgroundColor: blue,
     },
+    weatherInfoLarge: {
+        textAlign: 'center',
+        fontSize: 80,
+        fontWeight: "600",
+        margin: 5,
+        color: white,
+    },
     weatherInfo: {
         textAlign: 'center',
-        fontSize: 16,
+        fontSize: 18,
         margin: 5,
         color: white,
     },
@@ -32,7 +39,6 @@ const styles = StyleSheet.create({
         borderRadius: 10,
     },
     searchContainer: {
-        flex: 1,
         justifyContent: 'center',
         alignItems: 'center',
         flexDirection: 'row',
@@ -55,7 +61,8 @@ const styles = StyleSheet.create({
         margin: 10,
     },
     options: {
-        flex: 1,
+        marginTop: 20,
+        marginBottom: 40
     },
     optionWrapper: {
         justifyContent: 'center',
@@ -66,6 +73,7 @@ const styles = StyleSheet.create({
         textAlign: 'center',
         justifyContent: 'center',
         alignItems: 'center',
+        fontSize: 64,
     },
     mainContainer: {
         flex: 1,
@@ -114,7 +122,6 @@ const styles = StyleSheet.create({
     submit: {
         backgroundColor: '#EFEFEF',
         alignSelf: 'center',
-        marginTop: 10,
         padding: 8,
         borderRadius: 10,
         marginBottom: 20,
