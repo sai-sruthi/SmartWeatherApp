@@ -73,7 +73,7 @@ export class WeatherApp extends Component {
             <TouchableOpacity
               style={styles.submit}
               onPress={() => {
-              navigation.navigate("Recommendations");
+              navigation.navigate("Recommendations", {data: weatherData});
               }}>
                 <Text style={styles.btnLabel}>Get Recommendations</Text>
             </TouchableOpacity> 
