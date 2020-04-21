@@ -88,10 +88,14 @@ export function searchByCity(searchTerm) {
         return fetch(`${url}?q=${searchTerm}&appid=${appid}`)
             .then(response => response.json())
             .then((data) => {
-                dispatch(setErrorMessage(''));
-                dispatch(setIsLoading(false));
-                dispatch(setIsLocal(false));
-                dispatch(updateWeatherData(data));
+                if (data.cod == "404") {
+                    alert("Enter a valid location!");
+                } else {
+                    dispatch(setErrorMessage(''));
+                    dispatch(setIsLoading(false));
+                    dispatch(setIsLocal(false));
+                    dispatch(updateWeatherData(data));                    
+                }
             })
             .catch(() => {
                 dispatch(updateWeatherData({}));

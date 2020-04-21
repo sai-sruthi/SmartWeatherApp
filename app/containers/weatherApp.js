@@ -19,19 +19,23 @@ export class WeatherApp extends Component {
       this.user = JSON.parse(temp);
     }
 
+    getLocalWeather = () => {
+      navigator.geolocation.getCurrentPosition( 
+        (position) => {
+            const lat = position.coords.latitude.toString();
+            const lon = position.coords.longitude.toString();
+            this.props.actions.setIsLocal(true);
+            this.props.actions.searchByCoordinates(lat, lon);
+        },
+        () => {
+            const errorMessage = 'Could not fetch weather for your location';
+            this.props.actions.setErrorMessage(errorMessage);
+        },
+        { enableHighAccuracy: true, timeout: 20000, maximumAge: 1000 });
+    }
+
     componentDidMount() {
-        navigator.geolocation.getCurrentPosition( 
-            (position) => {
-                const lat = position.coords.latitude.toString();
-                const lon = position.coords.longitude.toString();
-                this.props.actions.setIsLocal(true);
-                this.props.actions.searchByCoordinates(lat, lon);
-            },
-            () => {
-                const errorMessage = 'Could not fetch weather for your location';
-                this.props.actions.setErrorMessage(errorMessage);
-            },
-            { enableHighAccuracy: true, timeout: 20000, maximumAge: 1000 });
+        this.getLocalWeather();
         this.getUser();
     }
 
@@ -41,19 +45,24 @@ export class WeatherApp extends Component {
         return (
           <View style={styles.container}>
             <SearchBox onComplete={actions.searchByCity} />
-            <WeatherInfo
-              weatherData={weatherData}
-              errorMessage={errorMessage}
-              isLoading={isLoading}
-              isFahrenheit={isFahrenheit}
-              isLocal = {isLocal}
-            />
             <Options
               style={styles.options}
               onValueChange={value => actions.setIsFahrenheit(value)}
               isFahrenheit={isFahrenheit}
               isLocal = {isLocal}
             />
+            <WeatherInfo
+              weatherData={weatherData}
+              errorMessage={errorMessage}
+              isLoading={isLoading}
+              isFahrenheit={isFahrenheit}
+              isLocal={isLocal}
+            />
+            <TouchableOpacity
+                style={styles.submit}
+                onPress={this.getLocalWeather}>
+                <Text style={styles.btnLabel}>GET LOCAL WEATHER</Text>
+            </TouchableOpacity> 
             <TouchableOpacity
                 style={styles.submit}
                 onPress={() => {
