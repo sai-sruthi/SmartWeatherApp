@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, TouchableWithoutFeedback, Keyboard, AsyncStorage } from 'react-native';
+import { View, Text, TouchableWithoutFeedback, Keyboard, AsyncStorage, ScrollView } from 'react-native';
 import styles from '../styles';
 import Login from '../components/login';
 import Register from '../components/register';
@@ -70,28 +70,30 @@ export default function Welcome({ navigation }) {
         regUser(user, navigation);
     }
     return (
-        <TouchableWithoutFeedback
-            onPress={() => {
-                Keyboard.dismiss();
-            }}>
-            <View style={styles.mainContainer}>
-                <Login
-                    setName={setName}
-                    setPassword={setPassword}
-                    authenticateUser={authenticateUser} />
-                <View>
-                    <Text style={styles.sectionHeader}>
-                        ------------------- OR -------------------
-                    </Text>
+        <ScrollView>
+            <TouchableWithoutFeedback
+                onPress={() => {
+                    Keyboard.dismiss();
+                }}>
+                <View style={styles.mainContainer}>
+                    <Login
+                        setName={setName}
+                        setPassword={setPassword}
+                        authenticateUser={authenticateUser} />
+                    <View>
+                        <Text style={styles.sectionHeader}>
+                            ------------------- OR -------------------
+                        </Text>
+                    </View>
+                    <Register
+                        user={user}
+                        setName={setName}
+                        setPassword={setPassword}
+                        setUpdates={setUpdates}
+                        setBusinessUser={setBusinessUser}
+                        registerUser={registerUser} />
                 </View>
-                <Register
-                    user={user}
-                    setName={setName}
-                    setPassword={setPassword}
-                    setUpdates={setUpdates}
-                    setBusinessUser={setBusinessUser}
-                    registerUser={registerUser} />
-            </View>
-        </TouchableWithoutFeedback>
+            </TouchableWithoutFeedback>
+        </ScrollView>
     );
 }
