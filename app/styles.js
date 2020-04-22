@@ -1,5 +1,6 @@
 import { Dimensions, StyleSheet } from 'react-native';
 
+const tabwidth = Dimensions.get('window').width/2; 
 const gray = '#cccccc';
 const blue = '#5DBCD2';
 const white = '#ffffff';
@@ -68,6 +69,30 @@ const styles = StyleSheet.create({
         fontSize: 16,
         margin: 5,
         color: white,
+    },
+    tabContainer:{
+        width: Dimensions.get('window').width,
+        backgroundColor: '#648dd1',
+        opacity: 0.9,
+        marginTop: 25
+    },
+    tabbar:{
+        flexDirection:"row",
+        justifyContent: 'center',
+        borderTopWidth:2,
+        borderColor: '#446eb3'
+    },
+    tab:{
+        width: tabwidth,
+        textAlign: 'center',
+        justifyContent: 'center',
+        paddingVertical: 15,
+        
+    },
+    tabLabel: {
+        alignSelf: 'center',
+        color: white,
+        fontSize: 13,
     },
     searchbox: {
         textAlign: 'center',

@@ -62,30 +62,33 @@ export class WeatherApp extends Component {
                 style={styles.submit}
                 onPress={this.getLocalWeather}>
                 <Text style={styles.btnLabel}>GET LOCAL WEATHER</Text>
-            </TouchableOpacity> 
-            <TouchableOpacity
-                style={styles.submit}
-                onPress={() => {
-                  // this is needed because in certain
-                  // scenarios (2 as of now), the updated
-                  // user value stored in the async storage
-                  // is not set to the class variable before
-                  // it is passed to the settings screen
-                  prereq = async () => {
-                    await this.getUser();
-                    navigation.navigate("Settings", {user: this.user});
-                  }
-                  prereq();
-                }}>
-                <Text style={styles.btnLabel}>CHANGE NOTIFICATION SETTINGS</Text>
-            </TouchableOpacity> 
-            <TouchableOpacity
-              style={styles.submit}
-              onPress={() => {
-              navigation.navigate("Recommendations", {data: weatherData});
-              }}>
-                <Text style={styles.btnLabel}>Get Recommendations</Text>
-            </TouchableOpacity> 
+            </TouchableOpacity>
+            <View style={styles.tabContainer}>
+              <View style={styles.tabbar}>
+                <View style={styles.tab}>
+                  <TouchableOpacity
+                      // style={styles.submit}
+                      onPress={() => {
+                        prereq = async () => {
+                          await this.getUser();
+                          navigation.navigate("Settings", {user: this.user});
+                        }
+                        prereq();
+                      }}>
+                      <Text style={styles.tabLabel}>NOTIFICATION SETTINGS</Text>
+                  </TouchableOpacity>
+                </View> 
+                <View style={styles.tab}>
+                  <TouchableOpacity
+                    // style={styles.submit}
+                    onPress={() => {
+                    navigation.navigate("Recommendations", {data: weatherData});
+                    }}>
+                      <Text style={styles.tabLabel}>RECOMMENDATION</Text>
+                  </TouchableOpacity>
+                </View> 
+              </View>
+            </View>
           </View>
         );
     }
