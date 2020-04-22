@@ -10,7 +10,7 @@ const styles = StyleSheet.create({
         height: Dimensions.get('window').height,
         justifyContent: 'center',
         alignItems: 'center',
-        backgroundColor: blue,
+        backgroundColor: '#5078ba',
     },
     weatherInfoLarge: {
         textAlign: 'center',
@@ -22,6 +22,43 @@ const styles = StyleSheet.create({
     weatherInfo: {
         textAlign: 'center',
         fontSize: 18,
+        margin: 5,
+        color: white,
+    },
+    location:{
+        flexDirection:"row", 
+        alignItems: 'center', 
+        justifyContent: 'center',
+    },
+    locationName:{
+        fontSize: 18,
+    },
+    temperature:{
+        flexDirection:"row", 
+        alignItems: 'center', 
+        justifyContent: 'center',
+    },
+    temperatureValue:{
+        fontSize: 60,
+        color: white,
+        marginHorizontal: 10
+    },
+    cardContainer:{
+        backgroundColor: '#648dd1',
+        opacity: 0.8,
+        borderRadius: 20,
+        marginTop: 25
+    },
+    weatherCard:{
+        flexDirection:"row",
+        justifyContent: 'center',
+        marginVertical: 7,
+        marginHorizontal: 40
+
+    },
+    weatherDetails:{
+        flexDirection:"column",
+        fontSize: 16,
         margin: 5,
         color: white,
     },
@@ -62,7 +99,7 @@ const styles = StyleSheet.create({
     },
     options: {
         marginTop: 20,
-        marginBottom: 40
+        marginBottom: 15
     },
     optionWrapper: {
         justifyContent: 'center',
