@@ -4,6 +4,7 @@ import { NavigationContainer } from '@react-navigation/native';
 import Welcome from '../containers/welcome';
 import Main from '../containers/main';
 import Settings from '../components/settings';
+import {Forecast} from '../containers/forecast';
 
 const Stack = createStackNavigator();
 
@@ -26,6 +27,12 @@ function Navigator() {
                 }} />
                 <Stack.Screen name="Settings" component={Settings} options={{
                     headerLeft: null,
+                    title: "",
+                    headerStyle: {
+                        height: 0
+                    }
+                }} />
+                <Stack.Screen name="Forecast" component={Forecast} options={{
                     title: "",
                     headerStyle: {
                         height: 0

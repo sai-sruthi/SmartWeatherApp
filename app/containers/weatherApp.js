@@ -69,6 +69,16 @@ export class WeatherApp extends Component {
                   prereq();
                 }}>
                 <Text style={styles.btnLabel}>CHANGE NOTIFICATION SETTINGS</Text>
+                
+            </TouchableOpacity> 
+            <TouchableOpacity
+                style={styles.submit}
+                onPress={() => {
+
+                navigation.navigate("Forecast");
+
+                }}>
+                <Text style={styles.btnLabel}>Get Forecast</Text>
             </TouchableOpacity> 
           </View>
         );
