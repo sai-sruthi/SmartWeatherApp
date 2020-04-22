@@ -4,7 +4,9 @@ import Icon from 'react-native-vector-icons/Ionicons';
 import styles from '../styles';
 import utils from '../utils';
 
+
 export default function Recommendations({ route }) {
+    // console.log(getWeather());
     const sunrise = route.params.data.sys.sunrise;
     const sunset = route.params.data.sys.sunset;
     const rightNow = Date.now() / 1000;
@@ -41,20 +43,31 @@ export default function Recommendations({ route }) {
       return suggestion;
   };
 
-
-
-
-  console.log("###########################");
-  console.log(route.params.data.main.temp);
-  console.log(isChilly())
-  console.log("###########################");
   return (
-    <View>
-      <Text>
-        {"\n\n\n"}
-        {/* {route.params.data.weather[0].main} */}
-        {isChilly()}{getAccToWeather()}
-      </Text>
+    <View style={styles.container}>
+      <View style={[styles.cardContainer, styles.cardMargin]}>
+        <View style={styles.weatherCard}>
+            <View style={styles.weatherDetails}>
+                <Text style={{color: '#FFFFFF'}}>Image 1</Text>
+            </View>
+            <View style={styles.weatherDetails}>
+                <Text style={{color: '#FFFFFF'}}>Image2</Text>
+            </View>
+        </View>
+        <View
+            style={{
+                borderBottomColor: '#b7daf7',
+                borderBottomWidth: 0.5,
+                marginVertical: 4,
+                marginHorizontal: 20
+            }}
+        />
+        <View style={styles.weatherCard}>
+            <View style={styles.weatherDetails}>
+                <Text style={{color: '#FFFFFF'}}>{isChilly()}{getAccToWeather()}</Text>
+            </View>
+        </View>
+      </View>
     </View>
   );
 

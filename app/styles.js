@@ -49,12 +49,19 @@ const styles = StyleSheet.create({
         borderRadius: 20,
         marginTop: 25
     },
+    // cardMargin:{
+    //     marginTop: 40
+    // },
     weatherCard:{
         flexDirection:"row",
         justifyContent: 'center',
         marginVertical: 7,
         marginHorizontal: 40
 
+    },
+    cardHead:{
+        justifyContent: 'center',
+        fontSize: 18,
     },
     weatherDetails:{
         flexDirection:"column",
