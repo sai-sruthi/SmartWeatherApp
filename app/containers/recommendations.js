@@ -1,12 +1,14 @@
 import React, { useState, useEffect, Component } from 'react';
-import { View, Text, TouchableWithoutFeedback, Keyboard, AsyncStorage, ScrollView } from 'react-native';
+import { View, Text, Image, TouchableWithoutFeedback, Keyboard, AsyncStorage, ScrollView } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
+import _ from 'lodash';
 import styles from '../styles';
 import utils from '../utils';
 
 
 export default function Recommendations({ route }) {
-    // console.log(getWeather());
+    let imageSrc1 = null;
+    let imageSrc2 = null;
     const sunrise = route.params.data.sys.sunrise;
     const sunset = route.params.data.sys.sunset;
     const rightNow = Date.now() / 1000;
@@ -15,7 +17,8 @@ export default function Recommendations({ route }) {
 
     const isChilly = (temperature = Math.round(route.params.data.main.temp - 273.15)) => {
       if (temperature < 15) {
-        return 'Chilly weather conditions, Carry a jacket!\nAlong with it, ';
+        imageSrc1 = 'https://img.icons8.com/ios-filled/50/000000/suit.png';
+        return 'Chilly weather conditions, carry a jacket!\nAlso, ';
       }
       return '';
     };
@@ -25,33 +28,61 @@ export default function Recommendations({ route }) {
       switch (description) {
           case 'Snow':
               suggestion = "Consider carrying Snow-Safe clothings.";
+              imageSrc2 = "https://img.icons8.com/ios-filled/50/000000/scarf.png";
               break;
           case 'Rain':
               suggestion = "Carry an Umbrella or a Rain-Coat to protect yourself from the rain.";
+              imageSrc2 = 'https://img.icons8.com/carbon-copy/100/000000/umbrella.png';
               break;
           case 'Fog':
-              suggestion = "Foggy weather could reduce visibility. So, please carry any Anti-Fog equipments";
+              suggestion = "Foggy weather could reduce visibility. So, please carry any Anti-Fog equipments.";
+              imageSrc2 = "https://img.icons8.com/ios-filled/50/000000/fog-lamp.png";
+              break;
+          case 'Clear':
+              if (dayTime){
+                suggestion = "Consider carrying a Sun-Screen.";
+                imageSrc2 = "https://img.icons8.com/ios-filled/50/000000/foundation-makeup.png";
+              }
+              else{
+                suggestion = "you can carry some cool night shades.";
+                imageSrc2 = "https://img.icons8.com/pastel-glyph/64/000000/vintage-glasses.png";
+              }
               break;
           default:
               if (dayTime){
-                suggestion = "Consider carrying a UV-Protection cream!";
+                suggestion = "Consider carrying Sun-Glaases!";
+                imageSrc2 = "https://img.icons8.com/pastel-glyph/64/000000/sun-glasses--v2.png";
               }
               else{
-                suggestion = "Consider carrying a light-weight jacket!"
+                suggestion = "you can carry some cool night shades.";
+                imageSrc2 = "https://img.icons8.com/pastel-glyph/64/000000/vintage-glasses.png";
               }
       }
       return suggestion;
   };
-
+  isChilly();
+  getAccToWeather();
   return (
     <View style={styles.container}>
       <View style={[styles.cardContainer, styles.cardMargin]}>
         <View style={styles.weatherCard}>
+          {_.isNull(imageSrc1) ? <Text></Text>
+            :
             <View style={styles.weatherDetails}>
-                <Text style={{color: '#FFFFFF'}}>Image 1</Text>
+                {/* Umbrella https://img.icons8.com/carbon-copy/100/000000/umbrella.png */}
+                {/* Jacket https://img.icons8.com/ios-filled/50/000000/suit.png */}
+                {/* Scarf https://img.icons8.com/ios-filled/50/000000/scarf.png */}
+                {/* Sunglasses https://img.icons8.com/pastel-glyph/64/000000/sun-glasses--v2.png */}
+                {/* Sunscreen https://img.icons8.com/ios-filled/50/000000/foundation-makeup.png */}
+                {/* Sunscreen https://img.icons8.com/ios-filled/50/000000/fog-lamp.png */}
+          
+                <Image style={{height:100, width:100, padding: 50}} source={{uri: imageSrc1,}}></Image>
+                {/* <Text style={{color: '#FFFFFF'}}>Image 1</Text> */}
             </View>
+          }
             <View style={styles.weatherDetails}>
-                <Text style={{color: '#FFFFFF'}}>Image2</Text>
+                <Image style={{height:100, width:100, padding: 50}} source={{uri: imageSrc2,}}></Image>
+                {/* <Text style={{color: '#FFFFFF'}}>Image2</Text> */}
             </View>
         </View>
         <View
@@ -64,7 +95,7 @@ export default function Recommendations({ route }) {
         />
         <View style={styles.weatherCard}>
             <View style={styles.weatherDetails}>
-                <Text style={{color: '#FFFFFF'}}>{isChilly()}{getAccToWeather()}</Text>
+                <Text style={{color: '#FFFFFF', textAlign: "left"}}>{isChilly()}{getAccToWeather()}</Text>
             </View>
         </View>
       </View>
