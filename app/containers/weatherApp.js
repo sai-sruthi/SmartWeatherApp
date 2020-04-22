@@ -7,12 +7,17 @@ import SearchBox from '../components/searchBox';
 import Options from '../components/options';
 import styles from '../styles';
 import * as weatherActions from '../actions';
+import {searchForecastByCoordinates} from '../services/forecastService';
 
 export class WeatherApp extends Component {
     static propTypes = {
     }
 
     user = null;
+
+    location = {
+
+    }
 
     getUser = async () => {
       const temp = await AsyncStorage.getItem("user");
@@ -24,6 +29,8 @@ export class WeatherApp extends Component {
             (position) => {
                 const lat = position.coords.latitude.toString();
                 const lon = position.coords.longitude.toString();
+                this.location.latitude = lat;
+                this.location.longitude = lon;
                 this.props.actions.setIsLocal(true);
                 this.props.actions.searchByCoordinates(lat, lon);
             },
@@ -74,9 +81,10 @@ export class WeatherApp extends Component {
             <TouchableOpacity
                 style={styles.submit}
                 onPress={() => {
-
-                navigation.navigate("Forecast");
-
+                  searchForecastByCoordinates(this.location.latitude, this.location.longitude)
+                  .then(function(data){                  
+                    navigation.navigate("Forecast", {forecastData: data});    
+                  });
                 }}>
                 <Text style={styles.btnLabel}>Get Forecast</Text>
             </TouchableOpacity> 

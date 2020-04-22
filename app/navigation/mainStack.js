@@ -4,7 +4,7 @@ import { NavigationContainer } from '@react-navigation/native';
 import Welcome from '../containers/welcome';
 import Main from '../containers/main';
 import Settings from '../components/settings';
-import {Forecast} from '../containers/forecast';
+import Forecast from '../containers/forecast';
 
 const Stack = createStackNavigator();
 
