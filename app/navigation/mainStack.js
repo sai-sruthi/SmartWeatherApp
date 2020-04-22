@@ -5,6 +5,7 @@ import Welcome from '../containers/welcome';
 import Main from '../containers/main';
 import Settings from '../components/settings';
 import Recommendations from '../containers/recommendations';
+import Graph from '../components/graph'
 
 const Stack = createStackNavigator();
 
@@ -33,6 +34,13 @@ function Navigator() {
                     }
                 }} />
                 <Stack.Screen name="Recommendations" component={Recommendations} options={{
+                    headerLeft: null,
+                    title: "",
+                    headerStyle: {
+                        height: 0
+                    }
+                }} />
+                <Stack.Screen name="Forecast" component={Graph} options={{
                     headerLeft: null,
                     title: "",
                     headerStyle: {

@@ -67,7 +67,14 @@ export class WeatherApp extends Component {
               <View style={styles.tabbar}>
                 <View style={styles.tab}>
                   <TouchableOpacity
-                      // style={styles.submit}
+                    onPress={() => {
+                    navigation.navigate("Forecast");
+                    }}>
+                    <Text style={styles.tabLabel}>Forecast</Text>
+                  </TouchableOpacity>
+                </View>
+                <View style={styles.tab}>
+                  <TouchableOpacity
                       onPress={() => {
                         prereq = async () => {
                           await this.getUser();
@@ -75,16 +82,15 @@ export class WeatherApp extends Component {
                         }
                         prereq();
                       }}>
-                      <Text style={styles.tabLabel}>NOTIFICATION SETTINGS</Text>
+                      <Text style={styles.tabLabel}>Settings</Text>
                   </TouchableOpacity>
                 </View> 
                 <View style={styles.tab}>
                   <TouchableOpacity
-                    // style={styles.submit}
                     onPress={() => {
                     navigation.navigate("Recommendations", {data: weatherData});
                     }}>
-                      <Text style={styles.tabLabel}>RECOMMENDATION</Text>
+                      <Text style={styles.tabLabel}>Alerts</Text>
                   </TouchableOpacity>
                 </View> 
               </View>

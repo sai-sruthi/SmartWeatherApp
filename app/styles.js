@@ -1,6 +1,6 @@
 import { Dimensions, StyleSheet } from 'react-native';
 
-const tabwidth = Dimensions.get('window').width/2; 
+const tabwidth = Dimensions.get('window').width/3; 
 const gray = '#cccccc';
 const blue = '#5DBCD2';
 const white = '#ffffff';
