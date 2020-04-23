@@ -81,6 +81,21 @@ export function setIsLocal(isLocal){
     };
 }
 
+// /**
+//  * updateForecastData - set data from API response
+//  * @param  {object} forecastData - response from API
+//  * @return {object} Action
+//  */
+// export function updateForecastData(forecastData) {
+//     return {
+//         type: UPDATE_FORECAST_DATA,
+//         forecastData,
+//     };
+// }
+
+
+
+
 export function searchByCity(searchTerm) {
     return (dispatch) => {
         const { appid, url } = config;
@@ -122,3 +137,43 @@ export function searchByCoordinates(latitude, longitude) {
             });
     };
 }
+
+//Forecast API's
+
+// export function searchForecastByCity(searchTerm) {
+//     return (dispatch) => {
+//         const { appid, forecast_url } = config;
+//         dispatch(setIsLoading(true)); 
+//         return fetch(`${forecast_url}?q=${searchTerm}&appid=${appid}`)
+//             .then(response => response.json())
+//             .then((data) => {
+//                 dispatch(setErrorMessage(''));
+//                 dispatch(setIsLoading(false));
+//                 dispatch(setIsLocal(false));
+//                 dispatch(updateForecastData(data));
+//             })
+//             .catch(() => {
+//                 dispatch(updateForecastData({}));
+//                 dispatch(setErrorMessage(`Could not fetch weather forecast for ${searchTerm}`));
+//             });
+//     };
+// }
+
+// export function searchForecastByCoordinates(latitude, longitude) {
+//     return (dispatch) => {
+//         const { appid, forecast_url } = config;
+//         dispatch(setIsLoading(true));
+//         return fetch(`${forecast_url}?lat=${latitude}&lon=${longitude}&appid=${appid}`)
+//             .then(response => response.json())
+//             .then((data) => {
+//                 dispatch(setErrorMessage(''));
+//                 dispatch(setIsLoading(false));
+//                 dispatch(setIsLocal(true));
+//                 dispatch(updateForecastData(data));
+//             })
+//             .catch(() => {
+//                 dispatch(updateForecastData({}));
+//                 dispatch(setErrorMessage('Could not fetch weather forecast for your location'));
+//             });
+//     };
+// }

@@ -5,7 +5,7 @@ import Welcome from '../containers/welcome';
 import Main from '../containers/main';
 import Settings from '../components/settings';
 import Recommendations from '../containers/recommendations';
-import Graph from '../components/graph'
+import Forecast from '../containers/forecast';
 
 const Stack = createStackNavigator();
 
@@ -40,7 +40,7 @@ function Navigator() {
                         height: 0
                     }
                 }} />
-                <Stack.Screen name="Forecast" component={Graph} options={{
+                <Stack.Screen name="Forecast" component={Forecast} options={{
                     headerLeft: null,
                     title: "",
                     headerStyle: {

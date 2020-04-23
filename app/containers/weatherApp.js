@@ -7,12 +7,17 @@ import SearchBox from '../components/searchBox';
 import Options from '../components/options';
 import styles from '../styles';
 import * as weatherActions from '../actions';
+import {searchForecastByCoordinates} from '../services/forecastService';
 
 export class WeatherApp extends Component {
     static propTypes = {
     }
 
     user = null;
+
+    location = {
+
+    }
 
     getUser = async () => {
       const temp = await AsyncStorage.getItem("user");
@@ -36,6 +41,20 @@ export class WeatherApp extends Component {
 
     componentDidMount() {
         this.getLocalWeather();
+        navigator.geolocation.getCurrentPosition( 
+            (position) => {
+                const lat = position.coords.latitude.toString();
+                const lon = position.coords.longitude.toString();
+                this.location.latitude = lat;
+                this.location.longitude = lon;
+                this.props.actions.setIsLocal(true);
+                this.props.actions.searchByCoordinates(lat, lon);
+            },
+            () => {
+                const errorMessage = 'Could not fetch weather for your location';
+                this.props.actions.setErrorMessage(errorMessage);
+            },
+            { enableHighAccuracy: true, timeout: 20000, maximumAge: 1000 });
         this.getUser();
     }
 
@@ -68,10 +87,13 @@ export class WeatherApp extends Component {
                 <View style={styles.tab}>
                   <TouchableOpacity
                     onPress={() => {
-                    navigation.navigate("Forecast");
+                      searchForecastByCoordinates(this.location.latitude, this.location.longitude)
+                      .then(function(data){                  
+                        navigation.navigate("Forecast", {forecastData: data});    
+                      });
                     }}>
-                    <Text style={styles.tabLabel}>Forecast</Text>
-                  </TouchableOpacity>
+                    <Text style={styles.tabLabel}>Get Forecast</Text>
+                  </TouchableOpacity> 
                 </View>
                 <View style={styles.tab}>
                   <TouchableOpacity
