@@ -145,8 +145,8 @@ const styles = StyleSheet.create({
         fontSize: 64,
     },
     mainContainer: {
-        flex: 1,
-        backgroundColor: '#5DBCD2',
+        height: Dimensions.get('window').height,
+        backgroundColor: '#5078ba',
         textAlign: 'center',
         justifyContent: 'center',
     },
