@@ -36,7 +36,7 @@ export default function Welcome({ navigation }) {
                 }
             }
         }
-        // this._notificationSubscription = Notifications.addListener(handleNotification);
+        this._notificationSubscription = Notifications.addListener(handleNotification);
         checkIfLoggedIn();
     }, []);
     const [user, setUser] = useState({
