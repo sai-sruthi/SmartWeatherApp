@@ -1,10 +1,7 @@
-import React, { useState, useEffect, Component } from 'react';
-import { View, Text, Image, TouchableWithoutFeedback, Keyboard, AsyncStorage, ScrollView } from 'react-native';
-import Icon from 'react-native-vector-icons/Ionicons';
+import React from 'react';
+import { View, Text, Image } from 'react-native';
 import _ from 'lodash';
 import styles from '../styles';
-import utils from '../utils';
-
 
 export default function Recommendations({ route }) {
     let imageSrc1 = null;
@@ -50,7 +47,7 @@ export default function Recommendations({ route }) {
               break;
           default:
               if (dayTime){
-                suggestion = "Consider carrying Sun-Glaases!";
+                suggestion = "Consider carrying Sun-Glases!";
                 imageSrc2 = "https://img.icons8.com/pastel-glyph/64/000000/sun-glasses--v2.png";
               }
               else{
@@ -69,12 +66,6 @@ export default function Recommendations({ route }) {
           {_.isNull(imageSrc1) ? <Text></Text>
             :
             <View style={styles.weatherDetails}>
-                {/* Umbrella https://img.icons8.com/carbon-copy/100/000000/umbrella.png */}
-                {/* Jacket https://img.icons8.com/ios-filled/50/000000/suit.png */}
-                {/* Scarf https://img.icons8.com/ios-filled/50/000000/scarf.png */}
-                {/* Sunglasses https://img.icons8.com/pastel-glyph/64/000000/sun-glasses--v2.png */}
-                {/* Sunscreen https://img.icons8.com/ios-filled/50/000000/foundation-makeup.png */}
-                {/* Sunscreen https://img.icons8.com/ios-filled/50/000000/fog-lamp.png */}
           
                 <Image style={{height:100, width:100, padding: 50}} source={{uri: imageSrc1,}}></Image>
                 {/* <Text style={{color: '#FFFFFF'}}>Image 1</Text> */}
