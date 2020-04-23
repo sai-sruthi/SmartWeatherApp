@@ -19,10 +19,20 @@ export default function Forecast (props) {
     var minData = [];
     var maxData = [];
     var dates = [];
+    var gsDayNames = [
+        'Sunday',
+        'Monday',
+        'Tuesday',
+        'Wednesday',
+        'Thursday',
+        'Friday',
+        'Saturday'
+      ];
     forecastData.forEach( val => {
        minData.push((val.main.temp_min - 273));
        maxData.push((val.main.temp_max - 273));
-       dates.push((val.dt_txt));
+       var d = new Date(val.dt*1000);
+       dates.push(gsDayNames[d.getDay()]);
     });
     const linedata = {
         labels: dates,
@@ -47,13 +57,14 @@ export default function Forecast (props) {
             <SearchBox onComplete={sf} />
             <View>
                 <Text>
-                    Bezier Line Chart
+                    Minimum Temperatures estimates
                 </Text>
                 <LineChart
                     data={linedata}
+                    // verticalLabelRotation={90}
                     width={Dimensions.get('window').width} // from react-native
                     height={220}
-                    yAxisLabel={'°C'}
+                    yAxisSuffix={'°C'}
                     chartConfig={{
                     backgroundGradientFrom: '#648dd1',
                     backgroundGradientTo: '#ffa726',
@@ -72,13 +83,13 @@ export default function Forecast (props) {
             </View>
             <View>
                 <Text>
-                    Bezier Line Chart
+                Maximum Temperatures estimates
                 </Text>
                 <LineChart
                     data={linedata2}
                     width={Dimensions.get('window').width} // from react-native
                     height={220}
-                    yAxisLabel={'°C'}
+                    yAxisSuffix={'°C'}
                     chartConfig={{
                     backgroundGradientFrom: '#648dd1',
                     backgroundGradientTo: '#ffa726',
