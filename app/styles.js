@@ -11,7 +11,13 @@ const styles = StyleSheet.create({
         height: Dimensions.get('window').height,
         justifyContent: 'center',
         alignItems: 'center',
-        backgroundColor: '#5078ba',
+        backgroundColor: '#2a6c9c',
+    },
+    mainLogo:{
+        justifyContent: 'center',
+        alignItems: 'center',
+        marginTop: 60,
+        marginBottom: 30,
     },
     weatherInfoLarge: {
         textAlign: 'center',
@@ -45,7 +51,7 @@ const styles = StyleSheet.create({
         marginHorizontal: 10
     },
     cardContainer:{
-        backgroundColor: '#648dd1',
+        backgroundColor: '#4483B1',
         opacity: 0.8,
         borderRadius: 20,
         marginTop: 25
@@ -72,7 +78,7 @@ const styles = StyleSheet.create({
     },
     tabContainer:{
         width: Dimensions.get('window').width,
-        backgroundColor: '#648dd1',
+        backgroundColor: '#4483b1',
         opacity: 0.9,
         marginTop: 25
     },
@@ -146,18 +152,21 @@ const styles = StyleSheet.create({
     },
     mainContainer: {
         height: Dimensions.get('window').height,
-        backgroundColor: '#5078ba',
+        backgroundColor: '#2a6c9c',
         textAlign: 'center',
         justifyContent: 'center',
     },
     input: {
-        borderColor: '#FFFFFF',
+        borderColor: '#999999',
+        height: 40,
         borderRadius: 10,
-        borderWidth: 2,
-        marginBottom: 15,
+        borderWidth: 1,
         marginHorizontal: 70,
-        paddingHorizontal: 10,
-        backgroundColor: '#FFFFFF',
+        padding: 10,
+        backgroundColor: 'rgba(225,225,225,0.2)',
+        marginBottom: 20,
+        padding: 10,
+        color: '#ffffff'
     },
     largeInput: {
         borderColor: '#FFFFFF',
@@ -172,7 +181,6 @@ const styles = StyleSheet.create({
         alignSelf: 'center',
         color: '#FFFFFF',
         fontSize: 14,
-        fontWeight: 'bold',
         marginBottom: 10,
     },
     btnLabel: {

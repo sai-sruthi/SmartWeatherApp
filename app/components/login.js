@@ -6,16 +6,17 @@ export default function Login({ setName, setPassword, authenticateUser }) {
     return (
         <View>
             <Text style={styles.sectionHeader}>Login</Text>
-            <Text style={styles.label}>Username</Text>
+            {/* <Text style={styles.label}>Username</Text> */}
             <TextInput
                 style={styles.input}
-                placeholder="eg. John Doe"
+                placeholder="Username"
+                placeholderTextColor = '#d4d4d4'
                 onChangeText={setName} />
-            <Text style={styles.label}>Password</Text>
+            {/* <Text style={styles.label}>Password</Text> */}
             <TextInput
                 secureTextEntry={true}
                 style={styles.input}
-                placeholder="Secret"
+                placeholder="Password"
                 onChangeText={setPassword} />
             <TouchableOpacity
                 style={styles.submit}

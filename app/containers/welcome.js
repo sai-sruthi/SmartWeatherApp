@@ -8,7 +8,7 @@ import Login from '../components/login';
 import Register from '../components/register';
 import { authenticateUser as authUser, registerUser as regUser, saveUser } from '../services/welcomeService';
 import { Notifications } from 'expo';
-
+import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 // TODO: create a reducer for all the functions
 // if time permits
 export default function Welcome({ navigation }) {
@@ -36,7 +36,7 @@ export default function Welcome({ navigation }) {
                 }
             }
         }
-        this._notificationSubscription = Notifications.addListener(handleNotification);
+        // this._notificationSubscription = Notifications.addListener(handleNotification);
         checkIfLoggedIn();
     }, []);
     const [user, setUser] = useState({
@@ -109,15 +109,24 @@ export default function Welcome({ navigation }) {
                     Keyboard.dismiss();
                 }}>
                 <View style={styles.mainContainer}>
+                    <View style={styles.mainLogo}>
+                        <Text style={{color: '#FFFFFF', fontFamily:'Roboto', fontSize: 24}}>
+                            <Icon name="weather-partlycloudy" style={styles.weatherIcon} size={40} color="#FFFFFF" />
+                            SmartWeather
+                        </Text>
+                    </View>
                     <Login
                         setName={setName}
                         setPassword={setPassword}
                         authenticateUser={authenticateUser} />
-                    <View>
-                        <Text style={styles.sectionHeader}>
-                            ------------------- OR -------------------
-                        </Text>
-                    </View>
+                     <View
+                        style={{
+                            borderBottomColor: '#b7daf7',
+                            borderBottomWidth: 0.5,
+                            marginVertical: 10,
+                            marginHorizontal: 20
+                        }}
+                    />
                     <Register
                         user={user}
                         setName={setName}

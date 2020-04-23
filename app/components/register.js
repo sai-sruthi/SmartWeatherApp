@@ -7,24 +7,26 @@ export default function Register({ user, setName, setPassword, setUpdates, setBu
     return (
         <View>
             <Text style={styles.sectionHeader}>Register</Text>
-            <Text style={styles.label}>Name</Text>
+            {/* <Text style={styles.label}>Name</Text> */}
             <TextInput
                 style={styles.input}
-                placeholder="eg. John Doe"
+                placeholder="Name"
                 onChangeText={setName} />
-            <Text style={styles.label}>Password</Text>
+            {/* <Text style={styles.label}>Password</Text> */}
             <TextInput
                 secureTextEntry={true}
                 style={styles.input}
-                placeholder="Secret"
+                placeholder="Password"
                 onChangeText={setPassword} />
-            <Text style={styles.label}>Confirm Password</Text>
+            {/* <Text style={styles.label}>Confirm Password</Text> */}
             <TextInput
                 secureTextEntry={true}
                 style={styles.input}
-                placeholder="Secret"
+                placeholder="Confirm Password"
                 onChange={() => { }} />
-            <Text style={styles.label}>Receive Promotional Notifications?</Text>
+            <Text style={styles.label}>
+                Receive Promotion Alerts?
+            </Text>
             <View style={styles.options, localStyles.wrapper}>
                 <View style={styles.optionWrapper}>
                     <Text style={localStyles.option}>{'Nay'}</Text>
@@ -32,7 +34,7 @@ export default function Register({ user, setName, setPassword, setUpdates, setBu
                     <Text style={localStyles.option}>{'Yay'}</Text>
                 </View>
             </View>
-            <Text style={styles.label}>Are you a business user?</Text>
+            <Text style={styles.label}>Business user?</Text>
             <View style={styles.options, localStyles.wrapper}>
                 <View style={styles.optionWrapper}>
                     <Text style={localStyles.option}>{'Nay'}</Text>
