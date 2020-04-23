@@ -91,8 +91,8 @@ export default function Welcome({ navigation }) {
             >
                 <View style={localStyles.centeredView}>
                     <View style={localStyles.modalView}>
-                    <Text style={localStyles.modalText}>{notification.title}</Text>
-                        <Text style={{...localStyles.modalText, marginBottom: 10}}>{notification.body}</Text>
+                    <Text style={localStyles.modalTitle}>{notification.title}</Text>
+                        <Text style={{...localStyles.modalBody, marginBottom: 10}}>{notification.body}</Text>
                         <TouchableHighlight
                             style={{...styles.submit, marginBottom: 0, backgroundColor: '#5DBCD2'}}
                             onPress={() => {
@@ -150,7 +150,13 @@ const localStyles = StyleSheet.create({
         fontWeight: "bold",
         textAlign: "center"
     },
-    modalText: {
+    modalTitle: {
+        fontSize: 30,
+        fontWeight: "800",
+        marginBottom: 4,
+        textAlign: "center"
+    },
+    modalBody: {
         fontSize: 20,
         fontWeight: "400",
         marginBottom: 4,
