@@ -6,16 +6,13 @@ import {searchForecastByCity} from '../services/forecastService';
 import SearchBox from '../components/searchBox';
 import {LineChart} from 'react-native-chart-kit';
 
-let forecastData = {};
-let city = {};
-const sf = async (q) =>{
-    forecastData = await searchForecastByCity(q);
-    console.log(forecastData);
-}
-
 export default function Forecast (props) {
-    forecastData = props.route.params.forecastData;
-    city = forecastData.pop();
+    const [forecastData, setForecastData] = useState(props.route.params.forecastData); 
+    const [city, setCity] = useState(forecastData.pop());
+    const sf = async (q) =>{
+      let data = await searchForecastByCity(q);
+      setForecastData(data);
+    }    
     var minData = [];
     var maxData = [];
     var dates = [];

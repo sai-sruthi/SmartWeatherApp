@@ -96,7 +96,7 @@ const renderContent = (weatherData, isFahrenheit, isLocal) =>
                         <View style={styles.weatherCard}>
                             <View style={styles.weatherDetails}>
                                 <Text style={{color: '#FFFFFF'}}>Sunrise {"         "}</Text>
-                                <Text style={{color: '#FFFFFF'}}>{isLocal ? `${utils.toDate(weatherData.sys.sunrise)}`: 'N/A'} </Text>    
+                                <Text style={{color: '#FFFFFF'}}>{`${utils.toDate(weatherData.sys.sunrise)}`} </Text>    
                             </View>
                             <View
                                 style={{
@@ -108,7 +108,7 @@ const renderContent = (weatherData, isFahrenheit, isLocal) =>
                             />
                             <View style={styles.weatherDetails}>
                                 <Text style={{color: '#FFFFFF'}}>Sunset</Text>
-                                <Text style={{color: '#FFFFFF'}}>{isLocal ? `${utils.toDate(weatherData.sys.sunset)}`: 'N/A'} </Text>  
+                                <Text style={{color: '#FFFFFF'}}>{`${utils.toDate(weatherData.sys.sunset)}`} </Text>  
                             </View>
                         </View>
                     </View>
