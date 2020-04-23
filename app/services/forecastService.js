@@ -24,8 +24,6 @@ export const searchForecastByCoordinates = async (latitude, longitude) => {
         console.log("Error retreiving forecast data for current location");
     });
     dailyData.push(forecastData.city);
-    // console.log("FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF");
-    // console.log(dailyData);
     return dailyData;
     
 };

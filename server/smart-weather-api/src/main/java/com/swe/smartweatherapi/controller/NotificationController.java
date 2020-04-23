@@ -64,8 +64,8 @@ public class NotificationController {
         }
         notification.setTo(tokens);
         Map<String, String> data = new HashMap<>();
-        data.put("title", notification.getTitle());
-        data.put("body", notification.getBody());
+        data.put(TITLE, notification.getTitle());
+        data.put(BODY, notification.getBody());
         notification.setData(data);
         OkHttpClient.Builder httpClient = new OkHttpClient.Builder();
         Retrofit retrofit = new Retrofit.Builder()
