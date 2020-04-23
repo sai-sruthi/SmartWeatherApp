@@ -1,5 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, TouchableWithoutFeedback, Keyboard, AsyncStorage, ScrollView } from 'react-native';
+import {
+    View, Text, TouchableHighlight, TouchableWithoutFeedback, Keyboard, AsyncStorage,
+    ScrollView, Modal, StyleSheet
+} from 'react-native';
 import styles from '../styles';
 import Login from '../components/login';
 import Register from '../components/register';
@@ -9,6 +12,8 @@ import { Notifications } from 'expo';
 // TODO: create a reducer for all the functions
 // if time permits
 export default function Welcome({ navigation }) {
+    const [modalVisible, setModalVisible] = useState(false);
+    const [notification, setNotification] = useState({text: "", body: ""});
     useEffect(() => {
         // TODO: compare token with db token instead of
         // the token stored in async storage
@@ -24,13 +29,14 @@ export default function Welcome({ navigation }) {
                         await saveUser(user, navigation, false);
                         await AsyncStorage.removeItem("user");
                         await AsyncStorage.setItem("user", JSON.stringify(user));
-                        navigation.navigate("Home");                        
+                        navigation.navigate("Home");
                     } else {
-                        navigation.navigate("Home");                        
+                        navigation.navigate("Home");
                     }
                 }
             }
         }
+        this._notificationSubscription = Notifications.addListener(handleNotification);
         checkIfLoggedIn();
     }, []);
     const [user, setUser] = useState({
@@ -69,8 +75,35 @@ export default function Welcome({ navigation }) {
     const registerUser = () => {
         regUser(user, navigation);
     }
+    const handleNotification = (notification) => {
+        setNotification(notification.data);
+        setModalVisible(true);
+    }
     return (
         <ScrollView>
+            <Modal
+                animationType="slide"
+                transparent={true}
+                visible={modalVisible}
+                onRequestClose={() => {
+                    console.log("closed");
+                }}
+            >
+                <View style={localStyles.centeredView}>
+                    <View style={localStyles.modalView}>
+                    <Text style={localStyles.modalText}>{notification.title}</Text>
+                        <Text style={{...localStyles.modalText, marginBottom: 10}}>{notification.body}</Text>
+                        <TouchableHighlight
+                            style={{...styles.submit, marginBottom: 0, backgroundColor: '#5DBCD2'}}
+                            onPress={() => {
+                                setModalVisible(!modalVisible);
+                            }}
+                        >
+                            <Text style={localStyles.textStyle}>Close</Text>
+                        </TouchableHighlight>
+                    </View>
+                </View>
+            </Modal>
             <TouchableWithoutFeedback
                 onPress={() => {
                     Keyboard.dismiss();
@@ -97,3 +130,30 @@ export default function Welcome({ navigation }) {
         </ScrollView>
     );
 }
+
+const localStyles = StyleSheet.create({
+    centeredView: {
+        flex: 1,
+        justifyContent: "center",
+        alignItems: "center",
+        marginTop: 22
+    },
+    modalView: {
+        margin: 20,
+        backgroundColor: "white",
+        borderRadius: 10,
+        padding: 10,
+        alignItems: "center"
+    },
+    textStyle: {
+        color: "white",
+        fontWeight: "bold",
+        textAlign: "center"
+    },
+    modalText: {
+        fontSize: 20,
+        fontWeight: "400",
+        marginBottom: 4,
+        textAlign: "center"
+    }
+});

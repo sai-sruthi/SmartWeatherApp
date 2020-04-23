@@ -13,7 +13,9 @@ import retrofit2.Call;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 @RestController
@@ -25,6 +27,8 @@ public class NotificationController {
     // the range which will determine which
     // users get a promotional notification
     private final Double RANGE = 2.0;
+    private final String TITLE = "title";
+    private final String BODY = "body";
     private final String BASE_URL = "https://exp.host/--/api/v2/";
     private final String NOTIFICATIONS_SENT = "Notifications sent successfully!";
 
@@ -59,6 +63,10 @@ public class NotificationController {
                     .collect(Collectors.toList());
         }
         notification.setTo(tokens);
+        Map<String, String> data = new HashMap<>();
+        data.put("title", notification.getTitle());
+        data.put("body", notification.getBody());
+        notification.setData(data);
         OkHttpClient.Builder httpClient = new OkHttpClient.Builder();
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(BASE_URL)
