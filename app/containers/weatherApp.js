@@ -86,10 +86,10 @@ export class WeatherApp extends Component {
               <View style={styles.tabbar}>
                 <View style={styles.tab}>
                   <TouchableOpacity
-                    onPress={() => {
-                      searchForecastByCoordinates(this.location.latitude, this.location.longitude)
+                    onPress={async () => {
+                      await searchForecastByCoordinates(this.location.latitude, this.location.longitude)
                       .then(function(data){                  
-                        navigation.navigate("Forecast", {forecastData: data});    
+                        navigation.navigate("Forecast", {forecastData: data[0], nextdayData: data[1], city: data[2]});    
                       });
                     }}>
                     <Text style={styles.tabLabel}>Get Forecast</Text>
