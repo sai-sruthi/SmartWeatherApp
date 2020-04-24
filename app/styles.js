@@ -98,7 +98,7 @@ const styles = StyleSheet.create({
     tabLabel: {
         alignSelf: 'center',
         color: white,
-        fontSize: 13,
+        fontSize: 14,
     },
     searchbox: {
         textAlign: 'center',

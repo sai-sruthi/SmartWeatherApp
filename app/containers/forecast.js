@@ -75,10 +75,11 @@ export default function Forecast (props) {
 
     return (
         <View style={styles.container}>
+          <Text style={{fontFamily:'Roboto', fontSize: 28, color:'white'}}>Weather Forcast Data</Text>
             <SearchBox onComplete={sf} />
             <View>
-                <Text>
-                Temperature data for the next 5 days for {city.name}
+                <Text style={{alignSelf:'center', color:'white'}}>
+                Temperature for the next 5 days in {city.name}
                 </Text>
                 <LineChart
                     data={linedata}
@@ -102,9 +103,10 @@ export default function Forecast (props) {
                     }}
                 />
             </View>
+                  <View><Text>{'\n'}</Text></View>
             <View>
-                <Text>
-                Temperature data for the next 24 hours for {city.name}
+                <Text style={{alignSelf:'center', color:'white'}}>
+                Temperature for the next 24 hours in {city.name}
                 </Text>
                 <LineChart
                     data={linedata2}
