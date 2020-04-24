@@ -61,6 +61,7 @@ export default function Recommendations({ route }) {
   getAccToWeather();
   return (
     <View style={styles.container}>
+    <Text style={{fontFamily:'Roboto', fontSize: 28, color:'white'}}>Clothing Recommendations{'\n'}</Text>
       <View style={[styles.cardContainer, styles.cardMargin]}>
         <View style={styles.weatherCard}>
           {_.isNull(imageSrc1) ? <Text></Text>

@@ -8,6 +8,7 @@ import { sendNotifications } from '../services/notificationService';
 const togglePromotionalNotifications =
     (user, updatePreference, savePreference) => (
         <View>
+        <Text style={{fontFamily:'Roboto', fontSize: 24, alignSelf:'center', color:'white'}}>Settings{'\n\n'}</Text>
             <Text style={styles.label}>Receive Promotional Notifications?</Text>
             <View style={styles.options, localStyles.wrapper}>
                 <View style={styles.optionWrapper}>

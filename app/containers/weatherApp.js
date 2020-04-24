@@ -112,7 +112,7 @@ export class WeatherApp extends Component {
                     onPress={() => {
                     navigation.navigate("Recommendations", {data: weatherData});
                     }}>
-                      <Text style={styles.tabLabel}>Alerts</Text>
+                      <Text style={styles.tabLabel}>Recommendations</Text>
                   </TouchableOpacity>
                 </View> 
               </View>
