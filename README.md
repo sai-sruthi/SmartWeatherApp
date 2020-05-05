@@ -5,6 +5,7 @@ A simple weather application which provides features like weather forecast, reco
 
 ### API Server Setup
 * Import the server code in server/smart-weather-api in an IDE of your choice as a Maven project
+* Export the root certificate from https://expo.io/ and add it to the java keystore on your local machine
 * Start the server by either building a jar and then running it, or running as a Java Application
 
 ### Firebase Setup
