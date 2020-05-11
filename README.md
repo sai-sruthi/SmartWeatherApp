@@ -5,7 +5,7 @@ A simple weather application which provides features like weather forecast, reco
 
 ### API Server Setup
 * Import the server code in server/smart-weather-api in an IDE of your choice as a Maven project
-* Export the root certificate from https://expo.io/ and add it to the java keystore on your local machine
+* Export the root certificate from https://expo.io/ and add it to the java keystore on your local machine using command "keytool -import -alias <\certificate name\> -file api.expo.dev.cer -keystore mystore"
 * Start the server by either building a jar and then running it, or running as a Java Application
 
 ### Firebase Setup
@@ -16,7 +16,9 @@ A simple weather application which provides features like weather forecast, reco
 * Run expo push:android:upload --api-key \<server key\> in the project directory to upload the server key to expo server
 
 ### Client setup
+* Install expo-cli
 * Run npm install in the project folder
+* Change server host/port with IP and configured port in config.js 
 * Run npm start to start the expo server
 
 Download the expo application from Playstore/Appstore and scan the barcode generated on the expo server to run the application on your device.
